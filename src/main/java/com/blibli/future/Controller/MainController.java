@@ -13,7 +13,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String greeting(Model model) {
-        String nama = "Budi";
+        String nama = "mas dwi priyohutomo :)";
         model.addAttribute("name", nama);
         return "landing";
     }
