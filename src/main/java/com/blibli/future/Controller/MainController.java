@@ -15,7 +15,23 @@ public class MainController {
     public String greeting(Model model) {
         String nama = "mas dwi priyohutomo :)";
         model.addAttribute("name", nama);
-        return "landing";
+        return "index";
     }
+    @RequestMapping("/register")
+    public String greeting2(Model model) {
+        String nama2 = "pengunjung kami :)";
+        model.addAttribute("pengunjung", nama2);
+        return"register" ;
+    }
+    @RequestMapping("/login2")
+    public String greeting4(Model model) {
+        String nama3 = "pengunjung kami :)";
+        model.addAttribute("pengunjung2", nama3);
+        return "login2";
+    }
+    @RequestMapping("/login")
+    public String greeting5() {
+        return "login" ;
+        }
 
-}
+    }
