@@ -37,6 +37,12 @@ public class MainController {
     @RequestMapping("/care")
     public String greeting6() {
         return "care" ;
-    }
 
     }
+    @RequestMapping("/kitchen")
+    public String greeting7() {
+        return "kitchen";
+    }
+    }
+
+
