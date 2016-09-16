@@ -34,4 +34,9 @@ public class MainController {
         return "login" ;
         }
 
+    @RequestMapping("/care")
+    public String greeting6() {
+        return "care" ;
+    }
+
     }
