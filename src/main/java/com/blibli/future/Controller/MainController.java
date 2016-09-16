@@ -1,9 +1,9 @@
 package com.blibli.future.Controller;
 
+import com.blibli.future.Model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Nita on 02/09/2016.
@@ -13,6 +13,7 @@ public class MainController {
 
     @RequestMapping("/")
     public String greeting(Model model) {
+
         String nama = "mas dwi priyohutomo :)";
         model.addAttribute("name", nama);
         return "index";
@@ -21,7 +22,16 @@ public class MainController {
     public String greeting2(Model model) {
         String nama2 = "pengunjung kami :)";
         model.addAttribute("pengunjung", nama2);
-        return"register" ;
+        return "register" ;
+    }
+    @PostMapping("/register")
+    public String registerNewUser(@ModelAttribute User newUser, Model model){
+        // database.save(newUser)
+        // redirect halaman /home
+
+
+        model.addAttribute("newUser", newUser);
+        return "index";
     }
     @RequestMapping("/login2")
     public String greeting4(Model model) {
