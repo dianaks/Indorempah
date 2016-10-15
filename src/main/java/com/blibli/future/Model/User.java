@@ -1,9 +1,19 @@
 package com.blibli.future.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
+
 /**
  * Created by Nita on 16/09/2016.
  */
+@Entity
+@Table(name="Indorempah_user")
+
 public class User {
+    @Id
+
     private long id;
     private String username;
     private String email;
