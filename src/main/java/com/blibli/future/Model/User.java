@@ -1,9 +1,7 @@
 package com.blibli.future.Model;
+import com.blibli.future.Model.UserType;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Nita on 16/09/2016.
@@ -13,11 +11,15 @@ import javax.persistence.Table;
 
 public class User {
     @Id
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String username;
     private String email;
     private String password;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UserType type;
 
     public long getId() {
         return id;
@@ -49,5 +51,8 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public UserType getUserType() {
+        return type;
     }
 }

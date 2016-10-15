@@ -1,6 +1,8 @@
 package com.blibli.future.Controller;
 
 import com.blibli.future.Model.User;
+import com.blibli.future.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -8,8 +10,12 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Nita on 02/09/2016.
  */
+
 @Controller
 public class MainController {
+    @Autowired
+    private UserRepository userRepo;
+
 
     @RequestMapping("/")
     public String greeting(Model model) {
@@ -26,12 +32,13 @@ public class MainController {
     }
     @PostMapping("/register")
     public String registerNewUser(@ModelAttribute User newUser, Model model){
-        // database.save(newUser)
-        // redirect halaman /home
+         userRepo.save(newUser) ;
+         //redirect halaman /home
 
 
         model.addAttribute("newUser", newUser);
         return "index";
+
     }
     @RequestMapping("/login2")
     public String greeting4(Model model) {
