@@ -1,5 +1,6 @@
 package com.blibli.future.Controller;
 
+import com.blibli.future.Model.Product;
 import com.blibli.future.Model.User;
 import com.blibli.future.repository.UserRepository;
 import org.apache.log4j.Logger;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class MainController {
     @Autowired
     private UserRepository userRepo;
-
     private Logger log = Logger.getLogger(MainController.class.getName());;
 
 
@@ -62,15 +62,6 @@ public class MainController {
     @RequestMapping("/kitchen")
     public String greeting7() {
         return "kitchen";
-    }
-
-    @RequestMapping("/merchant/product/upload")
-    public String greeting8(){ return "merchant/upload"; }
-
-    @RequestMapping("/merchant/allProduct")
-    public String greeting9(){
-        log.info("Tes 234");
-        return "merchant/allProduct";
     }
 
 }
