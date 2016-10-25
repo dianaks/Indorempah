@@ -76,17 +76,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="main-agileits">
             <div class="form-w3agile">
                 <h3>Upload Product</h3>
-                <form action="save" method="post" modelAttribute="Product">
+                <form action="save" method="post" modelAttribute="Product" enctype="multipart/form-data">
                     <h4>Product Name</h4>
                     <div class="key">
                         <input  type="text" value="" name="name" required="">
                         <div class="clearfix"></div>
                     </div>
-                    <!--<h4>Product Image</h4>
+                    <h4>Product Image</h4>
                     <div class="key noborder">
-                        <input type="file" name="pic" accept="image/*">
+                        <input type="file" name="imagefile" accept="image/*">
                         <div class="clearfix"></div>
-                    </div>-->
+                    </div>
                     <h4>Product Description</h4>
                     <div class="key">
                         <input  type="text" value="" name="description" required="">
@@ -96,7 +96,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <h4>Product Category</h4>
                     <div class="key noborder">
                         <select name="category" required="">
-                            <option value="herbs">Herbs</option>
+                            <option value="Herbs">Herbs</option>
                             <option value="Spice">Spice</option>
                             <option value="Other">Other</option>
                         </select>

@@ -17,7 +17,7 @@ public class Product {
     private Integer price;
     private String category;
     private String description;
-    private String status;
+    private String status = "Available";
     private String picture;
 
     public long getId() {

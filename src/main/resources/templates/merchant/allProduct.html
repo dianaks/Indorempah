@@ -63,17 +63,35 @@
 <!--header-->
 {{>header}}
 <!--//header-->
+<div class="banner-top">
+    <div class="container">
+        <h3 >All Product</h3>
+        <h4><a href="index.html">Home</a><label>/</label>All Product</h4>
+        <div class="clearfix"> </div>
+    </div>
+</div>
 <!--contain-->
-<li>
-    {{#products}}
-    <ul>
-        {{name}}
-        {{category}}
-        {{description}}
-        {{unit}}
-    </ul>
-    {{/products}}
-</li>
+
+<div class="show-product">
+        {{#products}}
+        <div class="row product-box">
+            <div class="col-md-2 product-image">
+            <img class="img-responsive" src="{{picture}}">
+            </div>
+            <div class="col-md-8 product-detail">
+                <h3>{{name}}</h3><br>
+                <p>Category : {{category}}<br>
+                Description : {{description}}<br>
+                Price : /{{unit}}<br>
+                Status : </p>
+            </div>
+            <button>
+        </div>
+        {{/products}}
+</div>
+
+
+
 <!--//contain-->
 
 
