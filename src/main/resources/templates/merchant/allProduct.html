@@ -85,7 +85,10 @@
                 Price : /{{unit}}<br>
                 Status : </p>
             </div>
-            <button>
+            <a href="/merchant/product/{{id}}/edit" class="edit">Edit</a>
+            <form action="/merchant/product/{{id}}/delete" method="post">
+                <button class="delete" value="Delete">Delete</button>
+            </form>
         </div>
         {{/products}}
 </div>

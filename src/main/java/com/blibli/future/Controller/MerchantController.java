@@ -6,10 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -75,6 +72,21 @@ public class MerchantController {
         model.addAttribute("products",products);
         return "merchant/allProduct";
 
+    }
+
+    @RequestMapping(value = "/merchant/product/{id}/edit", method = RequestMethod.GET)
+    public String editProduct(@PathVariable("id") Long id, Model model){
+        Product editableProduct = productRepo.findOne(id);
+        model.addAttribute("product", editableProduct);
+
+        return "merchant/product/edit-product";
+    }
+
+    @PostMapping("/merchant/product/{id}/delete")
+    public String deleteProduct(@PathVariable("id") Long id, Model model){
+        productRepo.delete(id);
+
+        return "redirect:/merchant/allProduct";
     }
 
 }

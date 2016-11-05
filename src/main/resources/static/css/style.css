@@ -42,7 +42,37 @@ ul{
 {
     padding: 10px;
 }
+.button{
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
 
+.edit{
+    background-color: white; /* Green */
+    border: 1px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.edit:hover{
+    background-color: #4CAF50; /* Green */
+    border: 1px solid #4CAF50;
+    color: white;
+}
+
+.delete{
+    background-color: white; /* Green */
+    border: 1px solid red;
+    color: red;
+}
+
+.delete:hover{
+    background-color: red; /* Green */
+    border: 1px solid red;
+    color: white;
+}
 
 
 /*--popup--*/

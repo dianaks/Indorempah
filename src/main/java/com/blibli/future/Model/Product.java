@@ -83,4 +83,22 @@ public class Product {
     public void setPicture(String picture) {
         this.picture = picture;
     }
+
+    public boolean isHerbs(){
+        return this.category == "Herbs";
+    }
+    public boolean isSpice(){
+        return this.category == "Spice";
+    }
+
+    public boolean isKilogram(){
+        return this.unit == "kg";
+    }
+    public boolean isGram(){
+        return this.unit == "gram";
+    }
+    public boolean isSack(){
+        return this.unit == "sack";
+    }
+
 }
