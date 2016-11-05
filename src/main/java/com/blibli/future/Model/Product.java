@@ -85,20 +85,23 @@ public class Product {
     }
 
     public boolean isHerbs(){
-        return this.category == "Herbs";
+        return this.category.equals("Herbs");
     }
     public boolean isSpice(){
-        return this.category == "Spice";
+        return this.category.equals("Spice");
+    }
+    public boolean isOther(){
+        return this.category.equals("Other");
     }
 
     public boolean isKilogram(){
-        return this.unit == "kg";
+        return this.unit.equals("kg");
     }
     public boolean isGram(){
-        return this.unit == "gram";
+        return this.unit.equals("gram");
     }
     public boolean isSack(){
-        return this.unit == "sack";
+        return this.unit.equals("sack");
     }
 
 }
