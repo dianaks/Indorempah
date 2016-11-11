@@ -18,6 +18,17 @@ public class DatabaseSeeder {
 
     @PostConstruct // jalanin fungsi ini saat pertama kali spring dijalankan
     private void mockupData() {
+        Product o = new Product();
+        o.setName("Lengkuas");
+        o.setCategory("Other");
+        o.setDescription("Lengkuas, laos atau kelawas merupakan jenis tumbuhan umbi-umbian" +
+                " yang bisa hidup di daerah dataran tinggi maupun dataran rendah. ");
+        o.setUnit("kg");
+        o.setPrice(70000);
+        o.setStatus("Available");
+        o.setPicture("http://www.sekedarinfo.com/wp-content/uploads/2015/09/Manfaat-Lengkuas-atau-Laos-Untuk-pengobatan.jpg");
+        productRepo.save(o);
+
         Product p = new Product();
         p.setName("Cabai Rawit");
         p.setCategory("Spice");
@@ -52,6 +63,63 @@ public class DatabaseSeeder {
         r.setPicture("https://muslimahzone.com/assets/2012/12/Turmeric.gif");
         productRepo.save(r);
 
+        Product s = new Product();
+        s.setName("Lidah Buaya");
+        s.setCategory("Herbs");
+        s.setDescription("Lidah buaya adalah sejenis tumbuhan yang sudah dikenal sejak " +
+                "ribuan tahun silam dan digunakan sebagai penyubur rambut, penyembuh luka, dan untuk perawatan kulit.");
+        s.setUnit("kg");
+        s.setPrice(2000);
+        s.setStatus("Available");
+        s.setPicture("http://www.tokomesin.com/wp-content/uploads/2015/04/lidah-buaya-tokomesin.jpg?x52897");
+        productRepo.save(s);
+
+        Product t = new Product();
+        t.setName("Kemangi");
+        t.setCategory("Herbs");
+        t.setDescription("Kemangi adalah terna kecil yang daunnya biasa dimakan sebagai lalap. " +
+                "Aroma daunnya khas, kuat namun lembut dengan sentuhan aroma limau");
+        t.setUnit("sack");
+        t.setPrice(25000);
+        t.setStatus("Available");
+        t.setPicture("http://halosehat.com/wp-content/uploads/2015/10/daun-kemangi.jpg");
+        productRepo.save(t);
+
+        Product u = new Product();
+        u.setName("Cabai Keriting");
+        u.setCategory("Spice");
+        u.setDescription("Cabai keriting adalah buah dari salah satu jenis tanaman cabai-cabaian " +
+                "yang berbentuk panjang dan ramping namun memiliki tekstur keriting. ");
+        u.setUnit("kg");
+        u.setPrice(70000);
+        u.setStatus("Available");
+        u.setPicture("http://www.anneahira.com/images/cabe-merah-keriting.jpg");
+        productRepo.save(u);
+
+        Product v = new Product();
+        v.setName("Lada Putih");
+        v.setCategory("Spice");
+        v.setDescription("Lada, disebut juga Merica/Sahang, yang mempunyai nama Latin Piper " +
+                "Albi Linn adalah sebuah tanaman yang kaya akan kandungan kimia, " +
+                "seperti minyak lada, minyak lemak, juga pati.");
+
+        v.setUnit("kg");
+        v.setPrice(170000);
+        v.setStatus("Available");
+        v.setPicture("https://s4.bukalapak.com/img/900868492/medium/213032_d6caed99_5385_42bc_9dba_748a00de935e.jpg");
+        productRepo.save(v);
+
+        Product w = new Product();
+        w.setName("Jahe");
+        w.setCategory("Other");
+        w.setDescription(" Jahe, adalah tanaman rimpang yang sangat populer sebagai rempah-rempah dan bahan obat.");
+
+        w.setUnit("kg");
+        w.setPrice(20000);
+        w.setStatus("Available");
+        w.setPicture("http://obatherbalibuhamil.com/wp-content/uploads/2015/07/Manfaat-Dan-Khasiat-Jahe-Bagi-Kesehatan-Ibu-Hamil1.jpg");
+        productRepo.save(w);
+
         Product x = new Product();
         x.setName("Daun Mint");
         x.setCategory("Herbs");
@@ -62,6 +130,18 @@ public class DatabaseSeeder {
         x.setStatus("Available");
         x.setPicture("http://kiosmakanansehat.com/wp-content/uploads/2016/08/daun-mint.jpg");
         productRepo.save(x);
+
+        Product y = new Product();
+        y.setName("Lada Hitam");
+        y.setCategory("Spice");
+        y.setDescription("Lada, disebut juga Merica/Sahang, yang mempunyai nama Latin Piper " +
+                "Albi Linn adalah sebuah tanaman yang kaya akan kandungan kimia, " +
+                "seperti minyak lada, minyak lemak, juga pati. ");
+        y.setUnit("kg");
+        y.setPrice(95000);
+        y.setStatus("Available");
+        y.setPicture("http://images.solopos.com/2015/05/Lada-hitam.jpg");
+        productRepo.save(y);
 
         Product z = new Product();
         z.setName("Kayu Manis");

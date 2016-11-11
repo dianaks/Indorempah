@@ -34,7 +34,7 @@ public class MainController {
     ProductRepository productRepo;
 
     @RequestMapping("/")
-    public String greeting(Model model) {
+    public String home (Model model) {
 
         List<Product> products = (List<Product>) productRepo.findAll();
         model.addAttribute("products",products);
@@ -64,7 +64,7 @@ public class MainController {
     }
 
     @RequestMapping("/register")
-    public String greeting2(HttpServletRequest request, Model model) {
+    public String register (HttpServletRequest request, Model model) {
         String nama2 = "pengunjung kami :)";
         model.addAttribute("pengunjung", nama2);
 
@@ -86,93 +86,70 @@ public class MainController {
 
         model.addAttribute("newUser", newUser);
         return "index";
-
     }
 
-
-    @RequestMapping("/login2")
-    public String greeting4(Model model) {
-        String nama3 = "pengunjung kami :)";
-        model.addAttribute("pengunjung2", nama3);
-        return "login2";
-    }
     @RequestMapping("/login")
-    public String greeting5(HttpServletRequest request, Model model) {
+    public String login (HttpServletRequest request, Model model) {
 
 
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
         return "login" ;
-        }
+    }
+
     @RequestMapping("/herbs")
-    public String greeting2122(Model model) {
+    public String herbs (Model model) {
 
         List<Product> products = (List<Product>) productRepo.findAll();
         model.addAttribute("products",products);
 
         List<Product> herbsProduct = new ArrayList<>();
-        List<Product> spiceProduct = new ArrayList<>();
-        List<Product> otherProduct = new ArrayList<>();
 
         for (Product p: products) {
-            System.out.println(p);
             if(p.isHerbs()){
                 herbsProduct.add(p);
-                System.out.println(herbsProduct);
-            }
-            else if(p.isSpice()) {
-                spiceProduct.add(p);
-            }
-            else if(p.isOther()) {
-                otherProduct.add(p);
             }
         }
 
         model.addAttribute("herbsProduct",herbsProduct);
-        model.addAttribute("spiceProduct",spiceProduct);
-        model.addAttribute("otherProduct",otherProduct);
+
         return "herbs";
     }
+
     @RequestMapping("/spices")
-    public String greeting21522(Model model) {
+    public String spice (Model model) {
 
         List<Product> products = (List<Product>) productRepo.findAll();
         model.addAttribute("products",products);
 
-        List<Product> herbsProduct = new ArrayList<>();
         List<Product> spiceProduct = new ArrayList<>();
-        List<Product> otherProduct = new ArrayList<>();
 
         for (Product p: products) {
-            System.out.println(p);
-            if(p.isHerbs()){
-                herbsProduct.add(p);
-                System.out.println(herbsProduct);
-            }
-            else if(p.isSpice()) {
+            if(p.isSpice()) {
                 spiceProduct.add(p);
-            }
-            else if(p.isOther()) {
-                otherProduct.add(p);
             }
         }
 
-        model.addAttribute("herbsProduct",herbsProduct);
         model.addAttribute("spiceProduct",spiceProduct);
-        model.addAttribute("otherProduct",otherProduct);
         return "spices";
     }
 
-    @RequestMapping("/care")
-    public String greeting6() {
-        return "care" ;
+    @RequestMapping("/other")
+    public String other (Model model) {
 
-    }
-    @RequestMapping("/kitchen")
-    public String greeting7() {
-        return "kitchen";
-    }
+        List<Product> products = (List<Product>) productRepo.findAll();
+        model.addAttribute("products",products);
 
+        List<Product> otherProduct = new ArrayList<>();
+
+        for (Product p: products) {
+            if(p.isOther()) {
+                otherProduct.add(p);
+            }
+        }
+        model.addAttribute("otherProduct",otherProduct);
+        return "other";
+    }
 
 }
