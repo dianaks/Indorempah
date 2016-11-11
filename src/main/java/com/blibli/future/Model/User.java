@@ -1,5 +1,4 @@
 package com.blibli.future.Model;
-import com.blibli.future.Model.UserType;
 
 import javax.persistence.*;
 
@@ -7,7 +6,7 @@ import javax.persistence.*;
  * Created by Nita on 16/09/2016.
  */
 @Entity
-@Table(name="Indorempah_user")
+@Table(name="indorempah_user")
 
 public class User {
     @Id
@@ -16,10 +15,11 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private boolean enabled = true;
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private UserType type;
+    private UserRole UserRole;
 
     public long getId() {
         return id;
@@ -52,7 +52,18 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public UserType getUserType() {
-        return type;
+    public UserRole getUserRole() {
+        return UserRole;
+
+    }
+    public void setUserRole(String role) {
+        this.UserRole = UserRole;
+    }
+    public boolean getEnabled() {
+        return enabled;
+
+    }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled ;
     }
 }
