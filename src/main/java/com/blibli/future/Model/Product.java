@@ -20,6 +20,10 @@ public class Product {
     private String status = "Available";
     private String picture;
 
+    public static final String HERBS="Herbs";
+    public static final String SPICE="Spice";
+    public static final String OTHER="Other";
+
     public long getId() {
         return id;
     }

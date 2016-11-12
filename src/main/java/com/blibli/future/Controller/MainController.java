@@ -36,27 +36,11 @@ public class MainController {
     @RequestMapping("/")
     public String home (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products",products);
+        List<Product> otherProduct = (List<Product>) productRepo.findByCategory(Product.OTHER);
+        List<Product> spiceProduct = (List<Product>) productRepo.findByCategory(Product.SPICE);
+        List<Product> herbsProduct = (List<Product>) productRepo.findByCategory(Product.HERBS);
 
-        List<Product> herbsProduct = new ArrayList<>();
-        List<Product> spiceProduct = new ArrayList<>();
-        List<Product> otherProduct = new ArrayList<>();
-
-        for (Product p: products) {
-            System.out.println(p);
-            if(p.isHerbs()){
-                herbsProduct.add(p);
-                System.out.println(herbsProduct);
-            }
-            else if(p.isSpice()) {
-                spiceProduct.add(p);
-            }
-            else if(p.isOther()) {
-                otherProduct.add(p);
-            }
-        }
-
+        model.addAttribute("products",otherProduct);
         model.addAttribute("herbsProduct",herbsProduct);
         model.addAttribute("spiceProduct",spiceProduct);
         model.addAttribute("otherProduct",otherProduct);
@@ -101,17 +85,7 @@ public class MainController {
     @RequestMapping("/herbs")
     public String herbs (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products",products);
-
-        List<Product> herbsProduct = new ArrayList<>();
-
-        for (Product p: products) {
-            if(p.isHerbs()){
-                herbsProduct.add(p);
-            }
-        }
-
+        List<Product> herbsProduct = (List<Product>) productRepo.findByCategory(Product.HERBS);
         model.addAttribute("herbsProduct",herbsProduct);
 
         return "herbs";
@@ -120,36 +94,19 @@ public class MainController {
     @RequestMapping("/spices")
     public String spice (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products",products);
-
-        List<Product> spiceProduct = new ArrayList<>();
-
-        for (Product p: products) {
-            if(p.isSpice()) {
-                spiceProduct.add(p);
-            }
-        }
-
+        List<Product> spiceProduct = (List<Product>) productRepo.findByCategory(Product.SPICE);
         model.addAttribute("spiceProduct",spiceProduct);
+
         return "spices";
     }
 
-    @RequestMapping("/other")
+    @RequestMapping("/others")
     public String other (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products",products);
-
-        List<Product> otherProduct = new ArrayList<>();
-
-        for (Product p: products) {
-            if(p.isOther()) {
-                otherProduct.add(p);
-            }
-        }
+        List<Product> otherProduct = (List<Product>) productRepo.findByCategory(Product.OTHER);
         model.addAttribute("otherProduct",otherProduct);
-        return "other";
+
+        return "others";
     }
 
 }
