@@ -20,6 +20,16 @@ public class Product {
     private String status = "Available";
     private String picture;
 
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    private String amount;
+
     public static final String HERBS="Herbs";
     public static final String SPICE="Spice";
     public static final String OTHER="Other";

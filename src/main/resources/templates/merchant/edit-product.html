@@ -1,73 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>INDOREMPAH</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta property="og:title" content="Vide" />
+    <meta name="keywords" content="Big store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="/assets/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- js -->
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="/assets/js/move-top.js"></script>
+    <script type="text/javascript" src="/assets/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--- start-rate---->
+    <script src="/assts/js/jstarbox.js"></script>
+    <link rel="stylesheet" href="/assets/css/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript">
+        jQuery(function() {
+            jQuery('.starbox').each(function() {
+                var starbox = jQuery(this);
+                starbox.starbox({
+                    average: starbox.attr('data-start-value'),
+                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                    ghosting: starbox.hasClass('ghosting'),
+                    autoUpdateAverage: starbox.hasClass('autoupdate'),
+                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                    stars: starbox.attr('data-star-count') || 5
+                }).bind('starbox-value-changed', function(event, value) {
+                    if(starbox.hasClass('random')) {
+                        var val = Math.random();
+                        starbox.next().text(' '+val);
+                        return val;
+                    }
+                })
+            });
+        });
+    </script>
+    <!---//End-rate---->
 </head>
 <body>
-<h3>Edit Product</h3>
-<form action="save" method="post" modelAttribute="Product" enctype="multipart/form-data">
-    <h4>Product Name</h4>
-    <div class="key">
-        <input  type="text" value="{{product.name}}" name="name" required="">
-        <div class="clearfix"></div>
+<!--header-->
+{{>header}}
+<!--//header-->
+
+<div class="banner-top">
+    <div class="container">
+        <h3 >Edit Product</h3>
+        <h4><a href="../index.html">Product</a><label>/</label>Edit</h4>
+        <div class="clearfix"> </div>
     </div>
-    <h4>Product Image</h4>
-    <div class="key noborder">
-        <input type="file" name="imagefile" accept="image/*">
-        <div class="clearfix"></div>
-    </div>
-    <h4>Product Description</h4>
-    <div class="key">
-        <input  type="text" value="{{product.description}}" name="description" required="">
-        <!--name harus sama dengan nama atribut class-->
-        <div class="clearfix"></div>
-    </div>
-    <h4>Product Category</h4>
-    <div class="key noborder">
-        <select name="category" required="">
-            <option value="Herbs"
-                    {{# product.isHerbs }} selected {{/ product.isHerbs }}
-            >Herbs</option>
-            <option value="Spice"
-                    {{# product.isSpice }} selected {{/ product.isSpice }}
-            >Spice</option>
-            <option value="Other"
-                    {{# product.isOther }} selected {{/ product.isOther }}
-            >Other</option>
-        </select>
-        <div class="clearfix"></div>
-    </div>
-    <h4 class="exkey-header">Product Price</h4>
-    <div class="exkey">
-        <div class="left">
-            <h5>Maximum Amount</h5>
-            <input  class="form-amount" type="text" value="{{product.price}}" name="first-max-amount" required="">
-            <input  class="form-amount"type="text" value="{{product.amount}}" name="second-max-amount" required="">
+</div>
+
+<div class="edit-product">
+    <div class="main-agileits">
+        <div class="form-w3agile">
+            <h3>Edit Product</h3>
+            <form action="save" method="post" modelAttribute="Product" enctype="multipart/form-data">
+                <h4>Product Name</h4>
+                <div class="key">
+                    <input  type="text" value="{{product.name}}" name="name" required="">
+                    <div class="clearfix"></div>
+                </div>
+                <h4>Product Image</h4>
+                <div class="image-thumbnail">
+                    <img src="{{product.picture}}" class="image-thumbnail">
+                </div>
+                <div class="key noborder">
+                    <input type="file" name="imagefile" accept="image/*">
+                    <div class="clearfix"></div>
+                </div>
+                <h4>Product Description</h4>
+                <div class="key">
+                    <input  type="text" value="{{product.description}}" name="description" required="">
+                    <!--name harus sama dengan nama atribut class-->
+                    <div class="clearfix"></div>
+                </div>
+                <h4>Product Category</h4>
+                <div class="key noborder">
+                    <select name="category" required="">
+                        <option value="Herbs"
+                                {{# product.isHerbs }} selected {{/ product.isHerbs }}
+                        >Herbs</option>
+                        <option value="Spice"
+                                {{# product.isSpice }} selected {{/ product.isSpice }}
+                        >Spice</option>
+                        <option value="Other"
+                                {{# product.isOther }} selected {{/ product.isOther }}
+                        >Other</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+                <h4 class="exkey-header">Product Price</h4>
+                <div class="exkey">
+                    <div class="left">
+                        <h5>Price</h5>
+                        <input  class="form-amount" type="text" value="{{product.price}}" name="first-max-amount" required="">
+                        <input  class="form-amount"type="text" value="{{product.price}}" name="second-max-amount" required="">
+                    </div>
+                    <div class="right">
+                        <h5>Maximum Amount</h5>
+                        <input class="form-price" type="text" value="{{product.amount}}" name="first-price" required="">
+                        <input class="form-price" type="text" value="{{product.amount}}" name="second-price" required="">
+                    </div>
+                    <h5>Product Unit</h5>
+                    <div>
+                        <select name="unit" required="">
+                            <option value="kg"
+                                    {{# product.isKilogram }} selected {{/ product.isKilogram}}
+                            >kilogram</option>
+                            <option value="g"
+                                    {{# product.isGram }} selected {{/ product.isGram }}
+                            >gram</option>
+                            <option value="sack"
+                                    {{# product.isSack }} selected {{/ product.isSack}}
+                            >sack</option>
+                        </select>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <input type="submit" value="Save">
+                <a href="/merchant/product" class="button"> Cancel</a>
+
+            </form>
         </div>
-        <div class="right">
-            <h5>Price</h5>
-            <input class="form-price" type="text" value="{{product.price}}" name="first-price" required="">
-            <input class="form-price" type="text" value="{{product.amount}}" name="second-price" required="">
-        </div>
-        <h5>Product Unit</h5>
-        <div>
-            <select name="unit" required="">
-                <option value="kg"
-                        {{# product.isKilogram }} selected {{/ product.isKilogram}}
-                >kilogram</option>
-                <option value="g"
-                        {{# product.isGram }} selected {{/ product.isGram }}
-                >gram</option>
-                <option value="sack"
-                        {{# product.isSack }} selected {{/ product.isSack}}
-                >sack</option>
-            </select>
-            <div class="clearfix"></div>
-        </div>
-        <div class="clearfix"></div>
     </div>
-    <input type="submit" value="Save">
-</form>
+</div>
+
+
+<!--footer-->
+{{>footer}}
+<!-- //footer-->
+<!-- smooth scrolling -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*
+         var defaults = {
+         containerID: 'toTop', // fading element id
+         containerHoverID: 'toTopHover', // fading element hover id
+         scrollSpeed: 1200,
+         easingType: 'linear'
+         };
+         */
+        $().UItoTop({ easingType: 'easeOutQuart' });
+    });
+</script>
+<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- //smooth scrolling -->
+<!-- for bootstrap working -->
+<script src="/assets/js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<script type='text/javascript' src="/assets/js/jquery.mycart.js"></script>
 </body>
 </html>

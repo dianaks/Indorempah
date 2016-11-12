@@ -40,7 +40,6 @@ public class MainController {
         List<Product> spiceProduct = (List<Product>) productRepo.findByCategory(Product.SPICE);
         List<Product> herbsProduct = (List<Product>) productRepo.findByCategory(Product.HERBS);
 
-        model.addAttribute("products",otherProduct);
         model.addAttribute("herbsProduct",herbsProduct);
         model.addAttribute("spiceProduct",spiceProduct);
         model.addAttribute("otherProduct",otherProduct);
@@ -49,9 +48,6 @@ public class MainController {
 
     @RequestMapping("/register")
     public String register (HttpServletRequest request, Model model) {
-        String nama2 = "pengunjung kami :)";
-        model.addAttribute("pengunjung", nama2);
-
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
@@ -74,8 +70,6 @@ public class MainController {
 
     @RequestMapping("/login")
     public String login (HttpServletRequest request, Model model) {
-
-
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 

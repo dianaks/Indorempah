@@ -2,8 +2,10 @@ package com.blibli.future.Controller;
 
 import com.blibli.future.Model.Product;
 import com.blibli.future.repository.ProductRepository;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,11 @@ public class MerchantController {
     ProductRepository productRepo;
 
     private Logger log = Logger.getLogger(MerchantController.class.getName());
+
+    @RequestMapping("merchant")
+    public String dashboard(){
+        return"merchant/merchant-home";
+    }
 
     @RequestMapping("merchant/product/upload")
     public String greeting8(){
@@ -63,30 +70,47 @@ public class MerchantController {
 
         productRepo.save(newProduct);
         model.addAttribute("newProduct",newProduct);
-        return "redirect:/merchant/allProduct";
+        return "redirect:/merchant/product";
     }
 
-    @RequestMapping("merchant/allProduct")
-    public String showProduct(Model model){
+    @RequestMapping("merchant/product")
+    public String showProduct(HttpServletRequest request, Model model){
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
         List<Product> products = (List<Product>) productRepo.findAll();
         model.addAttribute("products",products);
-        return "merchant/allProduct";
-
+        return "merchant/product";
     }
 
-    @RequestMapping(value = "/merchant/product/{id}/edit", method = RequestMethod.GET)
-    public String editProduct(@PathVariable("id") Long id, Model model){
-        Product editableProduct = productRepo.findOne(id);
+    @RequestMapping("/merchant/product/{id}/edit")
+    public String editProduct(HttpServletRequest request, @PathVariable String id, Model model){
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        Product editableProduct = productRepo.findOne(Long.parseLong(id));
+        model.addAttribute("product", editableProduct);
+
+        return "merchant/edit-product";
+    }
+
+    @RequestMapping("/merchant/product/{id}")
+    public String showOneProduct(HttpServletRequest request, @PathVariable String id, Model model){
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        Product editableProduct = productRepo.findOne(Long.parseLong(id));
         model.addAttribute("product", editableProduct);
 
         return "merchant/product/edit-product";
     }
 
+
     @PostMapping("/merchant/product/{id}/delete")
     public String deleteProduct(@PathVariable("id") Long id, Model model){
         productRepo.delete(id);
 
-        return "redirect:/merchant/allProduct";
+        return "redirect:/merchant/product";
     }
 
 }

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>INDOREMPAH</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta property="og:title" content="Vide" />
+    <meta name="keywords" content="INDOREMPAH, Indonesian Best Quality Herbs and Spices" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    <link href="/assets/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- js -->
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" src="/assets/js/move-top.js"></script>
+    <script type="text/javascript" src="/assets/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+    <link href="/assets/css/font-awesome.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--- start-rate---->
+    <script src="/assets/js/jstarbox.js"></script>
+    <link rel="stylesheet" href="/assets/css/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript">
+        jQuery(function() {
+            jQuery('.starbox').each(function() {
+                var starbox = jQuery(this);
+                starbox.starbox({
+                    average: starbox.attr('data-start-value'),
+                    changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+                    ghosting: starbox.hasClass('ghosting'),
+                    autoUpdateAverage: starbox.hasClass('autoupdate'),
+                    buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+                    stars: starbox.attr('data-star-count') || 5
+                }).bind('starbox-value-changed', function(event, value) {
+                    if(starbox.hasClass('random')) {
+                        var val = Math.random();
+                        starbox.next().text(' '+val);
+                        return val;
+                    }
+                })
+            });
+        });
+    </script>
+    <!---//End-rate---->
+
+</head>
+<>
+<!--header-->
+{{>header}}
+<!--//header-->
+    <div class="banner-top">
+        <div class="container">
+            <h3>Wellcome</h3>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="profile-content">
+            <div class="profile-image">
+
+            </div>
+            <div class="profile-detail">
+                Company name:<br>
+                Current Income: <br>
+                Status: <br>
+            </div>
+        </div>
+        <div class="merchant-menu">
+            <a href="edit-profile" class="button">Edit Profile</a>
+            <a href="product" class="button">Product List</a>
+            <a href="product/upload" class="button">Add New Product</a>
+        </div>
+        <h3>Order</h3>
+        <div class="merchant-order">
+            <table class="merchant-order-table">
+                <tr>
+                    <th>Order Id</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Date</th>
+                    <th>Status</th>
+
+                </tr>
+                <tr>
+                    <td><a href="order/detail">192860685746</a></td>
+                    <td>Albertus Magnus</td>
+                    <td>Bengkoang, Lengkuas</td>
+                    <td>22:30, 16/02/2012</td>
+                    <td><button>Accept</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+<!--footer-->
+{{>footer}}
+<!--//footer-->
+</body>
+</html>

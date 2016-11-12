@@ -28,7 +28,77 @@ ul{
 	margin:0;
 	padding:0;
 }
+/*merchant-home*/
+.content{
+    margin: 30px 100px;
+}
+.profile-content{
+    width:100%;
+    height:100px;
+}
+.profile-image{
+    float: left;
+    height:100px;
+    width:100px;
+    padding-right:20px;
+    background-color: grey;
+}
+.profile-detail{
+    float:left;
+    padding: 30px 20px;
+}
+.merchant-menu{
+    height:100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.merchant-order{
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+.merchant-order-table{
+    width:1149px;
+}
 
+table .merchant-order-table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th .merchant-order-table{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) .merchant-order-table {
+    background-color: #dddddd;
+}
+/*edit-page*/
+.image-thumbnail{
+    height: 100px; !important;
+}
+
+a.button:hover{
+    background: darkred;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+}
+a.button {
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+    background: #FC6914;
+    padding: 9px 20px;
+    width:100px;
+    margin-top: 1em;
+}
 /*--allproduct--*/
 .show-product{
     padding: 50px 150px;
@@ -54,24 +124,38 @@ ul{
     background-color: white; /* Green */
     border: 1px solid #4CAF50;
     color: #4CAF50;
+    text-decoration: none;
+    outline: none;
+    font-size: 1em;
+    padding: 3px 10px;
+    width:70px;
+    margin-top: 1em;
 }
 
 .edit:hover{
     background-color: #4CAF50; /* Green */
     border: 1px solid #4CAF50;
     color: white;
+    text-decoration: none;
 }
 
 .delete{
     background-color: white; /* Green */
     border: 1px solid red;
     color: red;
+    text-decoration: none;
+    outline: none;
+    font-size: 1em;
+    padding: 3px 10px;
+    width:70px;
+    margin-top: 1em;
 }
 
 .delete:hover{
     background-color: red; /* Green */
     border: 1px solid red;
     color: white;
+    text-decoration: none;
 }
 
 

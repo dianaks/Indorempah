@@ -87,13 +87,12 @@
             </div>
             <a href="/merchant/product/{{id}}/edit" class="edit">Edit</a>
             <form action="/merchant/product/{{id}}/delete" method="post">
+                <input type="hidden" name="_csrf" value="{{_csrf}}"/>
                 <button class="delete" value="Delete">Delete</button>
             </form>
         </div>
         {{/products}}
 </div>
-
-
 
 <!--//contain-->
 
