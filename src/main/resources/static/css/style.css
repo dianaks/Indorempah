@@ -29,7 +29,7 @@ ul{
 	padding:0;
 }
 /*merchant-home*/
-.content, .my-cart{
+.content, .my-cart, .checkout{
     margin: 30px 100px;
 }
 .profile-content{
@@ -56,24 +56,28 @@ ul{
     padding-top: 30px;
     padding-bottom: 50px;
 }
-.merchant-order-table, table.cart-table{
+.merchant-order-table, table.cart-table, table.checkout-table{
     width:1149px;
 }
 
-table.merchant-order-table, table.cart-table {
+table.merchant-order-table, table.cart-table, table.checkout-table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
     margin-top:10px;
 }
 
-td, th .merchant-order-table, th .cart-table{
+td, th .merchant-order-table,
+th .cart-table,
+th .checkout-table{
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-tr:nth-child(even) .merchant-order-table,tr:nth-child(even) .cart-table{
+tr:nth-child(even) .merchant-order-table,
+tr:nth-child(even) .cart-table,
+tr:nth-child(even).checkout-table {
     background-color: #dddddd;
 }
 /*cart*/
@@ -84,6 +88,17 @@ tr:nth-child(even) .merchant-order-table,tr:nth-child(even) .cart-table{
     float: left;
     width: 50px;
     padding-right:10px;
+}
+
+/*checkout*/
+.shipping-address{
+    padding: 10px 0px;
+}
+.shipping-address>div{
+    padding: 10px 0px;
+}
+.to-the-right-side{
+    text-align: right;
 }
 
 /*edit-page*/

@@ -24,4 +24,8 @@ public class UserController {
 //        return "/user/allProductUser";
 //
 //    }
+    @RequestMapping("/user/checkout")
+    public String checkout (Model model){
+        return "/user/checkout";
+    }
 }
