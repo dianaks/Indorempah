@@ -13,6 +13,7 @@ import java.util.Set;
 public class Cart {
     @Id
     private long id;
+    private String name;
     private long totalPrice;
     private String picture;
 
