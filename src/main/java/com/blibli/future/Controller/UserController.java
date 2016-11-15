@@ -28,4 +28,9 @@ public class UserController {
     public String checkout (Model model){
         return "/user/checkout";
     }
+
+    @RequestMapping("/user/order/history")
+    public String orderHistory(Model model){
+        return "/user/history";
+    }
 }

@@ -29,8 +29,12 @@ ul{
 	padding:0;
 }
 /*merchant-home*/
-.content, .my-cart, .checkout{
-    margin: 30px 100px;
+.content,
+.my-cart,
+.checkout,
+.product-details,
+.order-history{
+    margin: 50px 100px;
 }
 .profile-content{
     width:100%;
@@ -56,11 +60,17 @@ ul{
     padding-top: 30px;
     padding-bottom: 50px;
 }
-.merchant-order-table, table.cart-table, table.checkout-table{
+.merchant-order-table,
+table.cart-table,
+table.checkout-table,
+table.order-history-table{
     width:1149px;
 }
 
-table.merchant-order-table, table.cart-table, table.checkout-table {
+table.merchant-order-table,
+table.cart-table,
+table.checkout-table,
+table.order-history-table{
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -69,7 +79,8 @@ table.merchant-order-table, table.cart-table, table.checkout-table {
 
 td, th .merchant-order-table,
 th .cart-table,
-th .checkout-table{
+th .checkout-table,
+th .order-history-table{
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -77,7 +88,8 @@ th .checkout-table{
 
 tr:nth-child(even) .merchant-order-table,
 tr:nth-child(even) .cart-table,
-tr:nth-child(even).checkout-table {
+tr:nth-child(even) .checkout-table,
+tr:nth-child(even) .order-history-table{
     background-color: #dddddd;
 }
 /*cart*/
@@ -100,7 +112,10 @@ tr:nth-child(even).checkout-table {
 .to-the-right-side{
     text-align: right;
 }
-
+/*product-detail*/
+.margin-50px{
+    margin:50px;
+}
 /*edit-page*/
 .image-thumbnail{
     height: 100px; !important;
