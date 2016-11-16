@@ -66,11 +66,15 @@ table.checkout-table,
 table.order-history-table{
     width:1149px;
 }
+table.user-profile-table{
+    width:388px;
+}
 
 table.merchant-order-table,
 table.cart-table,
 table.checkout-table,
-table.order-history-table{
+table.order-history-table,
+table.user-profile{
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
@@ -89,8 +93,22 @@ th .order-history-table{
 tr:nth-child(even) .merchant-order-table,
 tr:nth-child(even) .cart-table,
 tr:nth-child(even) .checkout-table,
-tr:nth-child(even) .order-history-table{
+tr:nth-child(even) .order-history-table,
+tr:nth-child(even) .user-profile-table{
     background-color: #dddddd;
+}
+/*user profile*/
+
+.user-profile-picture{
+
+    margin: 30px 0px;
+    text-align: center;
+}
+.profile-picture{
+    height:100px;
+    width:100px;
+    border: 1px black solid;
+    margin-top: 20px;
 }
 /*cart*/
 .padding-30px{
@@ -116,10 +134,8 @@ tr:nth-child(even) .order-history-table{
 .margin-50px{
     margin:50px;
 }
+
 /*edit-page*/
-.image-thumbnail{
-    height: 100px; !important;
-}
 
 a.button:hover{
     background: darkred;
@@ -154,11 +170,25 @@ a.button {
     padding: 10px;
 }
 .button{
-    padding: 15px 32px;
+    padding: 9px 20px;
+    width:100px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1em;
+    border: none;
+    outline: none;
+    margin-top: 1em;
+}
+
+.button:hover{
+    color: #fff;
+    background: green;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
 }
 
 .edit{

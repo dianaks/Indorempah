@@ -25,12 +25,22 @@ public class UserController {
 //
 //    }
     @RequestMapping("/user/checkout")
-    public String checkout (Model model){
+    public String userCheckout (Model model){
         return "/user/checkout";
     }
 
     @RequestMapping("/user/order/history")
-    public String orderHistory(Model model){
+    public String userOrderHistory(Model model){
         return "/user/history";
+    }
+
+    @RequestMapping("/user/profile")
+    public String userProfile (Model model){
+        return "/user/profile";
+    }
+
+    @RequestMapping("/user/profile/edit")
+    public String userEditProfile (Model model){
+        return "/user/edit-profile";
     }
 }

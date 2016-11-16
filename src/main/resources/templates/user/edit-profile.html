@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>INDOREMPAH</title>
     <!-- for-mobile-apps -->
@@ -56,57 +56,58 @@
         });
     </script>
     <!---//End-rate---->
-
 </head>
-<>
+<body>
 <!--header-->
-{{>merchant/header}}
+{{>user/header}}
 <!--//header-->
-    <div class="banner-top">
-        <div class="container">
-            <h3>Wellcome</h3>
-            <div class="clearfix"> </div>
+<div class="banner-top">
+    <div class="container">
+        <h3 >Edit Profile</h3>
+        <h4><a href="../index.html">Profile</a><label>/</label>Edit</h4>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+    <div class="edit-profile">
+        <div class="main-agileits">
+            <div class="form-w3agile">
+                <h3>Edit Profile</h3>
+
+                <form action="save" method="post" modelAttribute="Product" enctype="multipart/form-data">
+                    <h4>Profile Image</h4>
+                    <div class="image-thumbnail">
+                        <img src="" class="profile-picture">
+                    </div>
+                    <div class="key noborder">
+                        <input type="file" name="imagefile" accept="image/*">
+                        <div class="clearfix"></div>
+                    </div>
+                    <h4>Company Description</h4>
+                    <div class="key">
+                        <input  type="text" value="" name="description" required="">
+                        <!--name harus sama dengan nama atribut class-->
+                        <div class="clearfix"></div>
+                    </div>
+                    <h4>Company Phone</h4>
+                    <div class="key">
+                        <input  type="text" value="" name="name" required="">
+                        <div class="clearfix"></div>
+                    </div>
+                    <h4>Company Address</h4>
+                    <div class="key">
+                        <input  type="text" value="" name="Address" required="">
+                        <!--name harus sama dengan nama atribut class-->
+                        <div class="clearfix"></div>
+                    </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <input class="button" type="submit" value="Save">
+                    <a href="" class="button"> Cancel</a>
+
+                </form>
+            </div>
         </div>
     </div>
-    <div class="content">
-        <div class="profile-content">
-            <div class="profile-image">
 
-            </div>
-            <div class="profile-detail">
-                Company name:<br>
-                Current Income: <br>
-                Status: <br>
-            </div>
-        </div>
-        <div class="merchant-menu">
-            <a href="edit-profile" class="button">Edit Profile</a>
-            <a href="product" class="button">Product List</a>
-            <a href="product/upload" class="button">Add New Product</a>
-        </div>
-        <h3>Order</h3>
-        <div class="merchant-order">
-            <table class="merchant-order-table">
-                <tr>
-                    <th>Order Id</th>
-                    <th>Customer</th>
-                    <th>Product</th>
-                    <th>Date</th>
-                    <th>Status</th>
-
-                </tr>
-                <tr>
-                    <td><a href="order/detail">192860685746</a></td>
-                    <td>Albertus Magnus</td>
-                    <td>Bengkoang, Lengkuas</td>
-                    <td>22:30, 16/02/2012</td>
-                    <td><button>Accept</button></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-<!--footer-->
-{{>merchant/footer}}
-<!--//footer-->
 </body>
 </html>

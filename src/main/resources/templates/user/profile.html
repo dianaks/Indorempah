@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>INDOREMPAH</title>
     <!-- for-mobile-apps -->
@@ -56,57 +56,67 @@
         });
     </script>
     <!---//End-rate---->
-
 </head>
-<>
-<!--header-->
-{{>merchant/header}}
-<!--//header-->
+<body>
+    <!--header-->
+    {{>user/header}}
+    <!--/header-->
+
+    <!--banner-->
     <div class="banner-top">
         <div class="container">
-            <h3>Wellcome</h3>
+            <h3 >Profile</h3>
+            <h4><a href="index.html">Home</a><label>/</label>Profile</h4>
             <div class="clearfix"> </div>
         </div>
     </div>
-    <div class="content">
-        <div class="profile-content">
-            <div class="profile-image">
 
-            </div>
-            <div class="profile-detail">
-                Company name:<br>
-                Current Income: <br>
-                Status: <br>
-            </div>
-        </div>
-        <div class="merchant-menu">
-            <a href="edit-profile" class="button">Edit Profile</a>
-            <a href="product" class="button">Product List</a>
-            <a href="product/upload" class="button">Add New Product</a>
-        </div>
-        <h3>Order</h3>
-        <div class="merchant-order">
-            <table class="merchant-order-table">
-                <tr>
-                    <th>Order Id</th>
-                    <th>Customer</th>
-                    <th>Product</th>
-                    <th>Date</th>
-                    <th>Status</th>
+    <!--login-->
 
-                </tr>
-                <tr>
-                    <td><a href="order/detail">192860685746</a></td>
-                    <td>Albertus Magnus</td>
-                    <td>Bengkoang, Lengkuas</td>
-                    <td>22:30, 16/02/2012</td>
-                    <td><button>Accept</button></td>
-                </tr>
-            </table>
+    <div class="login">
+        <div class="main-agileits">
+            <div class="form-w3agile form1">
+                <h3>Profile</h3>
+                    <div class="user-profile-picture">
+                        <img class="profile-picture" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Blank_square.svg/2000px-Blank_square.svg.png">
+                    </div>
+                <table class="user-profile-table">
+                    <tr>
+                        <td>Username</td>
+                        <td>username<!--Username--></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>********<!--Password--></td>
+                    </tr>
+                    <tr>
+                        <td>Company Name</td>
+                        <td>NamaCompany<!--Company Name--></td>
+                    </tr>
+                    <tr>
+                        <td>Company Type</td>
+                        <td><!--Company Type--></td>
+                    </tr>
+                    <tr>
+                        <td>Company Address</td>
+                        <td><!--CompanyAddress--></td>
+                    </tr>
+                    <tr>
+                        <td>Company Phone</td>
+                        <td><!--CompanyPhone--></td>
+                    </tr>
+                    <tr>
+                        <td>Company Description</td>
+                        <td><!--Company Description--></td>
+                    </tr>
+                </table>
+                <div class="to-the-right-side">
+                    <a href="edit-profile" class="button">Edit</a>
+                </div>
         </div>
     </div>
-<!--footer-->
-{{>merchant/footer}}
-<!--//footer-->
+    <!--footer-->
+    {{>footer}}
+    <!-- //footer-->
 </body>
 </html>
