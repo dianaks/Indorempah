@@ -25,8 +25,7 @@ import java.util.List;
 public class MainController {
     @Autowired
     private UserRepository userRepo;
-    private Logger log = Logger.getLogger(MainController.class.getName());
-    ;
+    private Logger log = Logger.getLogger(MainController.class.getName());;
 
     @Autowired
     UserRoleRepository userRoleRepo;
@@ -35,48 +34,32 @@ public class MainController {
     ProductRepository productRepo;
 
     @RequestMapping("/")
-    public String home(Model model) {
+    public String home (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products", products);
+        List<Product> otherProduct = (List<Product>) productRepo.findByCategory(Product.OTHER);
+        List<Product> spiceProduct = (List<Product>) productRepo.findByCategory(Product.SPICE);
+        List<Product> herbsProduct = (List<Product>) productRepo.findByCategory(Product.HERBS);
 
-        List<Product> herbsProduct = new ArrayList<>();
-        List<Product> spiceProduct = new ArrayList<>();
-        List<Product> otherProduct = new ArrayList<>();
+        model.addAttribute("herbsProduct",herbsProduct);
+        model.addAttribute("spiceProduct",spiceProduct);
+        model.addAttribute("otherProduct",otherProduct);
 
-        for (Product p : products) {
-            System.out.println(p);
-            if (p.isHerbs()) {
-                herbsProduct.add(p);
-                System.out.println(herbsProduct);
-            } else if (p.isSpice()) {
-                spiceProduct.add(p);
-            } else if (p.isOther()) {
-                otherProduct.add(p);
-            }
-        }
-
-        model.addAttribute("herbsProduct", herbsProduct);
-        model.addAttribute("spiceProduct", spiceProduct);
-        model.addAttribute("otherProduct", otherProduct);
+        model.addAttribute("userMode", true);
         return "index";
     }
 
     @RequestMapping("/register")
-    public String register(HttpServletRequest request, Model model) {
-        String nama2 = "pengunjung kami :)";
-        model.addAttribute("pengunjung", nama2);
-
+    public String register (HttpServletRequest request, Model model) {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
-        return "register";
+        return "register" ;
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@ModelAttribute User newUser, Model model) {
-        userRepo.save(newUser);
-        //redirect halaman /home
+    public String registerNewUser(@ModelAttribute User newUser,  Model model){
+         userRepo.save(newUser) ;
+         //redirect halaman /home
         UserRole r = new UserRole();
         r.setEmail(newUser.getEmail());
         r.setRole("ROLE_USER");
@@ -84,86 +67,52 @@ public class MainController {
 
 
         model.addAttribute("newUser", newUser);
-        return "index";
+        return "redirect:/";
     }
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, Model model) {
-
-
+    public String login (HttpServletRequest request, Model model) {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
-        return "login";
+        return "login" ;
     }
 
     @RequestMapping("/herbs")
-    public String herbs(Model model) {
+    public String herbs (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products", products);
-
-        List<Product> herbsProduct = new ArrayList<>();
-
-        for (Product p : products) {
-            if (p.isHerbs()) {
-                herbsProduct.add(p);
-            }
-        }
-
-        model.addAttribute("herbsProduct", herbsProduct);
+        List<Product> herbsProduct = (List<Product>) productRepo.findByCategory(Product.HERBS);
+        model.addAttribute("herbsProduct",herbsProduct);
 
         return "herbs";
     }
 
     @RequestMapping("/spices")
-    public String spice(Model model) {
+    public String spice (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products", products);
+        List<Product> spiceProduct = (List<Product>) productRepo.findByCategory(Product.SPICE);
+        model.addAttribute("spiceProduct",spiceProduct);
 
-        List<Product> spiceProduct = new ArrayList<>();
-
-        for (Product p : products) {
-            if (p.isSpice()) {
-                spiceProduct.add(p);
-            }
-        }
-
-        model.addAttribute("spiceProduct", spiceProduct);
         return "spices";
     }
 
-    @RequestMapping("/other")
-    public String other(Model model) {
+    @RequestMapping("/others")
+    public String other (Model model) {
 
-        List<Product> products = (List<Product>) productRepo.findAll();
-        model.addAttribute("products", products);
+        List<Product> otherProduct = (List<Product>) productRepo.findByCategory(Product.OTHER);
+        model.addAttribute("otherProduct",otherProduct);
 
-        List<Product> otherProduct = new ArrayList<>();
-
-        for (Product p : products) {
-            if (p.isOther()) {
-                otherProduct.add(p);
-            }
-        }
-        model.addAttribute("otherProduct", otherProduct);
-        return "other";
+        return "others";
     }
 
-    @RequestMapping("/product/{id}")
-    public String productDetail(@PathVariable("id") Long id, Model model){
-        Product showableProduct = productRepo.findOne(id);
-        model.addAttribute("product", showableProduct);
-//
-//        return "merchant/product/edit-product";
-//    public String herbs1(Model model) {
-        return "product_details";
-
+    @RequestMapping("/cart")
+    public String cart(){
+        return "cart";
     }
-        @RequestMapping("/cart")
-        public String cart(Model model) {
-            return "cart";
 
-        }
+    @RequestMapping("/product-details")
+    public String productDetail(Model model){
+        return "product-details";
+    }
+
 }

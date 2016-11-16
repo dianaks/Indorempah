@@ -1,6 +1,7 @@
 package com.blibli.future.configuration;
 
 import com.blibli.future.Model.Product;
+import com.blibli.future.Model.User;
 import com.blibli.future.repository.ProductRepository;
 import com.blibli.future.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ import javax.annotation.PostConstruct;
 public class DatabaseSeeder {
     @Autowired
     ProductRepository productRepo;
+    @Autowired
+    UserRepository userRepo;
 
     @PostConstruct // jalanin fungsi ini saat pertama kali spring dijalankan
     private void mockupData() {
@@ -165,6 +168,12 @@ public class DatabaseSeeder {
         z.setPicture("http://supermetroemall.com/image/cache/data/Bumbu/Kayu_manis_batan_512850cd73853-500x500.jpg");
         z.setAmount("10");
         productRepo.save(z);
+
+        User dummy = new User();
+        dummy.setUsername("dummy");
+        dummy.setEmail("dummy@email.com");
+        dummy.setPassword("dummy");
+        userRepo.save(dummy);
 
     }
 

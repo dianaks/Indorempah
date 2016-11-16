@@ -2244,10 +2244,20 @@ fieldset[disabled] .btn-warning.active {
   background-color: #fff;
 }
 .btn-danger {
+  border: none;
+  outline: none;
   color: #fff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
+  font-size: 1em;
+  background: #FC6914;
+  padding: 9px 20px;
+  width:100px;
+  margin-top: 1em;
 }
+.btn-danger:hover{
+  background: #62BF43; !important;
+  color: #FFFFFF;
+}
+
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:active,
@@ -2329,7 +2339,6 @@ fieldset[disabled] .btn-link:focus {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
 }
 .btn-xs,
 .btn-group-xs > .btn {
@@ -3340,7 +3349,7 @@ select[multiple].input-group-lg > .input-group-btn > .btn {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
+  border-radius: 0;
 }
 select.input-group-sm > .form-control,
 select.input-group-sm > .input-group-addon,
