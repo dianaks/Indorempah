@@ -1,12 +1,13 @@
 package com.blibli.future.security;
 
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+import javax.sql.DataSource;
 
 /**
  * Created by Fransiskus A K on 23/10/2016.
@@ -39,8 +40,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery(" select email, password, enabled from indorempah_user where email=?")
-                .authoritiesByUsernameQuery(" select email, role from user_role where email=? ") ;
+                .usersByUsernameQuery("select username, password, enabled from indorempah_user where username=?")
+                .authoritiesByUsernameQuery("select username, role from user_role where username=? ") ;
     }
 }
 

@@ -13,16 +13,16 @@
             <h1 ><a href="/"><img src="/assets/images/logo.png">INDOREMPAH<span>Indonesian Herbs and Spices</span></a></h1>
         </div>
         <div class="">
-            {{#user}}
-            <h6>Hi {{user.username}}</h6>
-            {{/user}}
+            {{#customer}}
+            <h6>Hi {{customer.username}}</h6>
+            {{/customer}}
         </div>
         <div class="head-t">
             <ul class="card">
                 <!--<li><a href="/wishlist" ><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a></li>-->
-                <li><a href="/logout" ><i class="fa fa-user" aria-hidden="true"></i>Logout</a></li>
-                <li><a href="/profile" ><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
-                <li><a href="/about" ><i class="fa fa-file-text-o" aria-hidden="true"></i>Order History</a></li>
+                <li><a href="/user/logout" ><i class="fa fa-user" aria-hidden="true"></i>Logout</a></li>
+                <li><a href="/user/profile" ><i class="fa fa-user" aria-hidden="true"></i>Profile</a></li>
+                <li><a href="/user/order" ><i class="fa fa-file-text-o" aria-hidden="true"></i>Order History</a></li>
                 <!--<li><a href="/shipping" ><i class="fa fa-ship" aria-hidden="true"></i>Shipping</a></li>-->
             </ul>
         </div>

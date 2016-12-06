@@ -1,20 +1,21 @@
 package com.blibli.future.Controller;
 
+import com.blibli.future.Model.Customer;
 import com.blibli.future.Model.Product;
-import com.blibli.future.Model.User;
-import com.blibli.future.Model.UserRole;
+import com.blibli.future.repository.CustomerRepository;
 import com.blibli.future.repository.ProductRepository;
-import com.blibli.future.repository.UserRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,50 +25,33 @@ import java.util.List;
 @Controller
 public class MainController {
     @Autowired
-    private UserRepository userRepo;
-    private Logger log = Logger.getLogger(MainController.class.getName());;
-
-    @Autowired
     UserRoleRepository userRoleRepo;
-
     @Autowired
     ProductRepository productRepo;
+    @Autowired
+    private CustomerRepository customerRepository;
+    private Logger log = Logger.getLogger(MainController.class.getName());
 
     @RequestMapping("/")
     public String home (Model model) {
 
-        List<Product> otherProduct = (List<Product>) productRepo.findByCategory(Product.OTHER);
-        List<Product> spiceProduct = (List<Product>) productRepo.findByCategory(Product.SPICE);
-        List<Product> herbsProduct = (List<Product>) productRepo.findByCategory(Product.HERBS);
+        List<Product> otherProduct = productRepo.findByCategory(Product.OTHER);
+        List<Product> spiceProduct = productRepo.findByCategory(Product.SPICE);
+        List<Product> herbsProduct = productRepo.findByCategory(Product.HERBS);
 
         model.addAttribute("herbsProduct",herbsProduct);
         model.addAttribute("spiceProduct",spiceProduct);
         model.addAttribute("otherProduct",otherProduct);
 
-        model.addAttribute("userMode", true);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
         return "index";
-    }
-
-    @RequestMapping("/register")
-    public String register (HttpServletRequest request, Model model) {
-        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-        model.addAttribute("_csrf", _csrf);
-
-        return "register" ;
-    }
-
-    @PostMapping("/register")
-    public String registerNewUser(@ModelAttribute User newUser,  Model model){
-         userRepo.save(newUser) ;
-         //redirect halaman /home
-        UserRole r = new UserRole();
-        r.setEmail(newUser.getEmail());
-        r.setRole("ROLE_USER");
-        userRoleRepo.save(r);
-
-
-        model.addAttribute("newUser", newUser);
-        return "redirect:/";
     }
 
     @RequestMapping("/login")
@@ -81,7 +65,7 @@ public class MainController {
     @RequestMapping("/herbs")
     public String herbs (Model model) {
 
-        List<Product> herbsProduct = (List<Product>) productRepo.findByCategory(Product.HERBS);
+        List<Product> herbsProduct = productRepo.findByCategory(Product.HERBS);
         model.addAttribute("herbsProduct",herbsProduct);
 
         return "herbs";
@@ -90,7 +74,7 @@ public class MainController {
     @RequestMapping("/spices")
     public String spice (Model model) {
 
-        List<Product> spiceProduct = (List<Product>) productRepo.findByCategory(Product.SPICE);
+        List<Product> spiceProduct = productRepo.findByCategory(Product.SPICE);
         model.addAttribute("spiceProduct",spiceProduct);
 
         return "spices";
@@ -99,7 +83,7 @@ public class MainController {
     @RequestMapping("/others")
     public String other (Model model) {
 
-        List<Product> otherProduct = (List<Product>) productRepo.findByCategory(Product.OTHER);
+        List<Product> otherProduct = productRepo.findByCategory(Product.OTHER);
         model.addAttribute("otherProduct",otherProduct);
 
         return "others";
