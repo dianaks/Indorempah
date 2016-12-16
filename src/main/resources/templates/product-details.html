@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Halaman Product Details </title>
+    <title>INDOREMPAH | Product</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -76,19 +76,19 @@
                 <div class="modal-body modal-spa">
                     <div class="col-md-3 span-2">
                         <div class="item to-the-right-side">
-                            <img src="/assets/images/of1.png" class="img-responsive" alt="">
+                            <img src="{{product.picture}}" class="img-responsive" alt="">
                         </div>
                     </div>
                     <div class="col-md-7 span-1 ">
-                        <h3> {product.name} </h3>
+                        <h3> {{product.name}} </h3>
                         <p class="in-para"> </p>
                         <div class="price_single">
-                            <span class="reducedfrom "><del>{product.price}</del>{product.price}</span>
+                            <span class="reducedfrom "><del>{{product.price}}</del>{{product.price}}/{{product.unit}}</span>
 
                             <div class="clearfix"></div>
                         </div>
                         <h4 class="quick">Quick Overview:</h4>
-                        <p class="quick_desc"> {product.description}; es</p>
+                        <p class="quick_desc"> {{product.description}}; es</p>
                         <div class="add-to">
                             <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="2" data-name="Sunflower Oil" data-summary="summary 2" data-price="9.00" data-quantity="1" data-image="images/of1.png">Add to Cart</button>
                         </div>

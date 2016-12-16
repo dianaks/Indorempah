@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-<title>INDOREMPAH|Spice</title>
+<title>INDOREMPAH | Spice</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -67,7 +67,12 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 <body>
 <!--header-->
+{{#isLoginAsCustomer}}
+{{>user/header}}
+{{/isLoginAsCustomer}}
+{{^isLoginAsCustomer}}
 {{>header}}
+{{/isLoginAsCustomer}}
 <!-- //header-->
 
     <!-- Carousel
@@ -141,7 +146,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--footer-->
 {{>footer}}
 <!-- //footer-->
-  
+
   <!-- product -->
 			<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">

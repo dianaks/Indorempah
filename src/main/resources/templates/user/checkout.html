@@ -59,7 +59,12 @@
 </head>
 <body>
     <!---header---->
+    {{#isLoginAsCustomer}}
     {{>user/header}}
+    {{/isLoginAsCustomer}}
+    {{^isLoginAsCustomer}}
+    {{>header}}
+    {{/isLoginAsCustomer}}
     <!---//header---->
     <div class="banner-top">
         <div class="container">

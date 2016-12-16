@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>INDOREMPAH</title>
+    <title>INDOREMPAH | Profile</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -59,7 +59,12 @@
 </head>
 <body>
 <!--header-->
+{{#isLoginAsCustomer}}
 {{>user/header}}
+{{/isLoginAsCustomer}}
+{{^isLoginAsCustomer}}
+{{>header}}
+{{/isLoginAsCustomer}}
 <!--//header-->
 <div class="banner-top">
     <div class="container">

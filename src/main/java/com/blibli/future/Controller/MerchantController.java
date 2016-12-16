@@ -1,10 +1,16 @@
 package com.blibli.future.Controller;
 
+import com.blibli.future.Model.Merchant;
 import com.blibli.future.Model.Product;
+import com.blibli.future.repository.MerchantRepository;
 import com.blibli.future.repository.ProductRepository;
+import com.blibli.future.repository.UserRoleRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +29,43 @@ import java.util.List;
 public class MerchantController {
     @Autowired
     ProductRepository productRepo;
+    @Autowired
+    MerchantRepository merchantRepo;
+    @Autowired
+    UserRoleRepository userRoleRepository;
 
     private Logger log = Logger.getLogger(MerchantController.class.getName());
 
     @RequestMapping("merchant")
-    public String dashboard(){
+    public String dashboard(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsMerchant = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsMerchant) {
+            Merchant merchant = merchantRepo.findByUsername(auth.getName());
+            model.addAttribute("merchant", merchant);
+        }
+        model.addAttribute("isLoginAsMerchant", isLoginAsMerchant);
         return"merchant/merchant-home";
     }
+    @RequestMapping("/merchant/register")
+    public String register (HttpServletRequest request, Model model) {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        return "merchant/register" ;
+    }
+
+    @PostMapping("/merchant/register")
+    public String registerNewUser(@ModelAttribute Merchant merchant, Model model){
+        merchant.createUserRoleEntry(userRoleRepository);
+        merchantRepo.save(merchant) ;
+
+        //redirect halaman /home
+        model.addAttribute("newUser", merchant);
+        return "redirect:/merchant";
+    }
+
 
     @RequestMapping("merchant/product/upload")
     public String greeting8(){
@@ -78,7 +114,7 @@ public class MerchantController {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
-        List<Product> products = (List<Product>) productRepo.findAll();
+        List<Product> products = productRepo.findAll();
         model.addAttribute("products",products);
         return "merchant/product";
     }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>INDOREMPAH</title>
+    <title>INDOREMPAH | Product</title>
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -60,7 +60,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <!--header-->
+{{#isLoginAsMerchant}}
 {{>merchant/header}}
+{{/isLoginAsMerchant}}
+{{^isLoginAsMerchant}}
+{{>header}}
+{{/isLoginAsMerchant}}
 <!--//header-->
 
 <div class="banner-top">

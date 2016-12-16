@@ -5,6 +5,7 @@ import com.blibli.future.repository.CustomerRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -65,16 +66,40 @@ public class CustomerController {
 
     @RequestMapping("/user/checkout")
     public String userCheckout (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
         return "/user/checkout";
     }
 
     @RequestMapping("/user/order/history")
     public String userOrderHistory(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
         return "/user/history";
     }
 
     @RequestMapping("/user/profile")
     public String userProfile (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
         return "/user/profile";
     }
 

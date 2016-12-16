@@ -61,7 +61,12 @@
 <body>
 <a href="offer.html"><img src="/assets/images/download.png" class="img-head" alt=""></a>
 <!--header-->
+{{#isLoginAsMerchant}}
+{{>merchant/header}}
+{{/isLoginAsMerchant}}
+{{^isLoginAsMerchant}}
 {{>header}}
+{{/isLoginAsMerchant}}
 <!--//header-->
 <div class="banner-top">
     <div class="container">

@@ -62,7 +62,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <a href="offer.html"><img src="images/download.png" class="img-head" alt=""></a>
 <!--header-->
+{{#isLoginAsMerchant}}
 {{>merchant/header}}
+{{/isLoginAsMerchant}}
+{{^isLoginAsMerchant}}
+{{>header}}
+{{/isLoginAsMerchant}}
 <!--//header-->
 <!--banner-->
 <div class="banner-top">
@@ -169,7 +174,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }, 500 , "linear", function() {
                     $image.remove();
                 });
-            }
+            };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
             $('.my-cart-btn').myCart({
                 classCartIcon: 'my-cart-icon',

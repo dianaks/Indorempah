@@ -1,8 +1,10 @@
 package com.blibli.future.configuration;
 
 import com.blibli.future.Model.Customer;
+import com.blibli.future.Model.Merchant;
 import com.blibli.future.Model.Product;
 import com.blibli.future.repository.CustomerRepository;
+import com.blibli.future.repository.MerchantRepository;
 import com.blibli.future.repository.ProductRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class DatabaseSeeder {
     CustomerRepository userRepo;
     @Autowired
     UserRoleRepository userRoleRepository;
+    @Autowired
+    MerchantRepository merchantRepo;
 
     @PostConstruct // jalanin fungsi ini saat pertama kali spring dijalankan
     private void mockupData() {
@@ -178,6 +182,15 @@ public class DatabaseSeeder {
         dummy.setEmail("dummy@email.com");
         dummy.setPassword("dummy");
         userRepo.save(dummy);
+
+        Merchant ada = new Merchant();
+        dummy.createUserRoleEntry(userRoleRepository);
+        dummy.setUsername("ada");
+        dummy.setEmail("ada@email.com");
+        dummy.setPassword("ada");
+        merchantRepo.save(ada);
+
+
     }
 
 }

@@ -60,7 +60,14 @@
 </head>
 <>
 <!--header-->
+{{#isLoginAsMerchant}}
 {{>merchant/header}}
+{{/isLoginAsMerchant}}
+{{^isLoginAsMerchant}}
+{{>header}}
+{{/isLoginAsMerchant}}
+
+
 <!--//header-->
     <div class="banner-top">
         <div class="container">

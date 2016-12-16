@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -68,6 +69,15 @@ public class MainController {
         List<Product> herbsProduct = productRepo.findByCategory(Product.HERBS);
         model.addAttribute("herbsProduct",herbsProduct);
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
+
         return "herbs";
     }
 
@@ -76,6 +86,15 @@ public class MainController {
 
         List<Product> spiceProduct = productRepo.findByCategory(Product.SPICE);
         model.addAttribute("spiceProduct",spiceProduct);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
 
         return "spices";
     }
@@ -86,6 +105,15 @@ public class MainController {
         List<Product> otherProduct = productRepo.findByCategory(Product.OTHER);
         model.addAttribute("otherProduct",otherProduct);
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
+
         return "others";
     }
 
@@ -94,8 +122,12 @@ public class MainController {
         return "cart";
     }
 
-    @RequestMapping("/product-details")
-    public String productDetail(Model model){
+    @RequestMapping("/product/{id}")
+    public String productDetail(@PathVariable String id, Model model){
+
+        Product detaileProduct = productRepo.findOne(Long.parseLong(id));
+        model.addAttribute("product", detaileProduct);
+
         return "product-details";
     }
 
