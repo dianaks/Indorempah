@@ -84,40 +84,40 @@
             <th>Total Price</th>
             <th>Remove</th>
         </tr>
-        <!--OrderDetailIteration-->
+        <!--DetailCartIteration--> {{#cart.detailCarts}}
         <tr>
-            <td><img src=""></td>
-            <td><!--OrderDetailProductName--></td>
-            <td><!--OrderDetailProductPrice--></td>
+            <td><img src="{{product.picture}}"></td>
+            <td><!--OrderDetailProductName-->{{product.name}}</td>
+            <td><!--OrderDetailProductPrice-->{{product.price}}</td>
             <td>
                 <form action="" method="get">
-                    <input class="floating" type="text" name="quantity" value=""><br>
+                    <input class="floating" type="text" name="quantity" value="{{amount}}"><br>
                     <!--<input class="floating" type="submit" value="Submit">-->
                 </form>
                 <form class="quantity-form" value=""></form>
             </td>
-            <td><!--OrderDetailTotalPrice--></td>
+            <td><!--OrderDetailTotalPrice-->{{price}}</td>
             <td>
                 <form action="" method="post">
                     <button class="delete" value="Delete">Delete</button>
                 </form>
             </td>
         </tr>
-        <!--//OrderDetailIteration-->
+        <!--//DetailCartIteration--> {{/cart.detailCarts}}
         <tr>
             <td colspan="4"><strong>Total</strong></td>
-            <td><strong><!--OrderGrandTotalPrice--></strong></td>
+            <td><strong><!--OrderGrandTotalPrice-->{{cart.totalPrice}}</strong></td>
             <td></td>
         </tr>
         <tr>
             <td colspan="4"><strong>Total(Include Discount)</strong></td>
-            <td><strong><!--OrderGrandTotal+DiscountPrice--></strong></td>
+            <td><strong><!--OrderGrandTotal+DiscountPrice-->{{cart.totalPrice}}</strong></td>
             <td></td>
         </tr>
     </table>
         <div class="padding-30px">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Check Out</button>
+            <a href="/"><button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button></a>
+            <a href="/checkout"><button type="button" class="btn btn-default" data-dismiss="modal">Check Out</button></a>
         </div>
     </div>
 <!--//contain-->

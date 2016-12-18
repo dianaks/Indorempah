@@ -20,11 +20,12 @@ public class DatabaseSeeder {
     @Autowired
     ProductRepository productRepo;
     @Autowired
-    CustomerRepository userRepo;
+    CustomerRepository customerRepo;
     @Autowired
     UserRoleRepository userRoleRepository;
     @Autowired
     MerchantRepository merchantRepo;
+
 
     @PostConstruct // jalanin fungsi ini saat pertama kali spring dijalankan
     private void mockupData() {
@@ -177,17 +178,25 @@ public class DatabaseSeeder {
         productRepo.save(z);
 
         Customer dummy = new Customer();
-        dummy.createUserRoleEntry(userRoleRepository);
         dummy.setUsername("dummy");
         dummy.setEmail("dummy@email.com");
         dummy.setPassword("dummy");
-        userRepo.save(dummy);
+        dummy.setCompanyName("PT.DummyCompany");
+        dummy.setCompanyAddress("Jl.dummy no 10 DIY");
+        dummy.setPhoneNumber("081234567890");
+        customerRepo.save(dummy);
+        dummy.createUserRoleEntry(userRoleRepository);
+        customerRepo.save(dummy);
 
         Merchant ada = new Merchant();
-        dummy.createUserRoleEntry(userRoleRepository);
-        dummy.setUsername("ada");
-        dummy.setEmail("ada@email.com");
-        dummy.setPassword("ada");
+        ada.setUsername("ada");
+        ada.setEmail("ada@email.com");
+        ada.setPassword("ada");
+        ada.setCompanyName("PT.AdaCompany");
+        ada.setCompanyAddress("Jl.ada no 11 DIY");
+        ada.setPhoneNumber("081234567890");
+        merchantRepo.save(ada);
+        ada.createUserRoleEntry(userRoleRepository);
         merchantRepo.save(ada);
 
 

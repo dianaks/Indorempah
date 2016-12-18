@@ -65,8 +65,6 @@ public class MerchantController {
         model.addAttribute("newUser", merchant);
         return "redirect:/merchant";
     }
-
-
     @RequestMapping("merchant/product/upload")
     public String greeting8(){
         return "merchant/upload"; }

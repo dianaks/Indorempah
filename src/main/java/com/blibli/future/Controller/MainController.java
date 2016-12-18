@@ -1,10 +1,10 @@
 package com.blibli.future.Controller;
 
+import com.blibli.future.Model.Cart;
 import com.blibli.future.Model.Customer;
+import com.blibli.future.Model.DetailCart;
 import com.blibli.future.Model.Product;
-import com.blibli.future.repository.CustomerRepository;
-import com.blibli.future.repository.ProductRepository;
-import com.blibli.future.repository.UserRoleRepository;
+import com.blibli.future.repository.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,12 @@ public class MainController {
     ProductRepository productRepo;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CartRepository cartRepo;
+    @Autowired
+    private DetailCartRepository detailCartRepository;
+
+
     private Logger log = Logger.getLogger(MainController.class.getName());
 
     @RequestMapping("/")
@@ -118,17 +124,59 @@ public class MainController {
     }
 
     @RequestMapping("/cart")
-    public String cart(){
+    public String cart(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Customer customer = customerRepository.findByUsername(auth.getName());
+        model.addAttribute("customer", customer);
+        Cart cart = cartRepo.findByCustomer(customer);
+        model.addAttribute("cart", cart);
+        System.out.println(cart.getDetailCarts().get(0).getProduct().getName());
         return "cart";
     }
 
     @RequestMapping("/product/{id}")
     public String productDetail(@PathVariable String id, Model model){
 
-        Product detaileProduct = productRepo.findOne(Long.parseLong(id));
-        model.addAttribute("product", detaileProduct);
+        Product detailProduct = productRepo.findOne(Long.parseLong(id));
+        model.addAttribute("product", detailProduct);
 
         return "product-details";
+    }
+
+    @RequestMapping("/product/in/{id}")
+    public String productOrder(@PathVariable String id, Model model){
+        // Cari produk yang diinginkan
+        Product orderedProduct = productRepo.findOne(Long.parseLong(id));
+
+        // Apakah sudah customer sudah login
+
+        // Cek apa customer yang sedang login sudah punya cart
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Customer customer = customerRepository.findByUsername(auth.getName());
+        model.addAttribute("customer", customer);
+        Cart cart = cartRepo.findByCustomer(customer);
+
+
+        // Jika belum, buat cart baru dan masukkan produk
+        if(cart == null){
+            cart = new Cart();
+            cart.setCustomer(customer);
+            cartRepo.save(cart);
+        }
+
+        // tambahkan produk ke dalam cart
+        DetailCart detailCart = new DetailCart();
+        detailCart.setProduct(orderedProduct);
+        detailCart.setAmount(1);
+        detailCart.setPrice(orderedProduct.getPrice());
+        detailCartRepository.save(detailCart);
+        detailCart.setCart(cart);
+        detailCartRepository.save(detailCart);
+
+        cart.updateTotalPrice();
+        cartRepo.save(cart);
+
+        return "redirect:/cart";
     }
 
 }

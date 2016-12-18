@@ -105,6 +105,27 @@ public class CustomerController {
 
     @RequestMapping("/user/profile/edit")
     public String userEditProfile (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
         return "/user/edit-profile";
+    }
+
+    @RequestMapping("/checkout")
+    public String checkout (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken) ;
+        if (isLoginAsCustomer) {
+            Customer customer = customerRepository.findByUsername(auth.getName());
+            model.addAttribute("customer", customer);
+        }
+        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
+        return "/user/checkout";
     }
 }

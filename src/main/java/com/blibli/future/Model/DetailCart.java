@@ -8,16 +8,23 @@ import javax.persistence.*;
 @Entity
 public class DetailCart {
     @Id
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private Integer amount;
     private Integer price;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
     private Product product;
+
+    @ManyToOne
+    private Cart cart;
+
     public Product getProduct() {
         return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public long getId() {
@@ -26,10 +33,6 @@ public class DetailCart {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public Integer getAmount() {
@@ -46,5 +49,14 @@ public class DetailCart {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+        cart.addDetailCart(this);
     }
 }
