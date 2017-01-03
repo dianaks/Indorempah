@@ -15,11 +15,13 @@
     <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
     <!-- js -->
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/currencyFormatter.min.js"></script>
     <!-- //js -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="/assets/js/move-top.js"></script>
     <script type="text/javascript" src="/assets/js/easing.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() { OSREC.CurrencyFormatter.formatAll( { selector: '.item_price', currency: 'IDR' }); });
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
                 event.preventDefault();
@@ -82,36 +84,33 @@
                 <th>Quantity</th>
                 <th>Total Price</th>
             </tr>
-            <!--OrderDetailIteration-->
+            {{#order.detailOrders}}<!--OrderDetailIteration-->
             <tr>
-                <td><img src=""></td>
-                <td><!--OrderDetailProductName--></td>
-                <td><!--OrderDetailProductPrice--></td>
-                <td><!--OrderDetailQuantity--></td>
-                <td><!--OrderDetailTotalPrice--></td>
+                <td><img src="{{product.picture}}"></td>
+                <td>{{product.name}}<!--OrderDetailProductName--></td>
+                <td><span class="item_price">{{product.firstPrice}}</span><!--OrderDetailProductPrice--></td>
+                <td>{{amount}}<!--OrderDetailQuantity--></td>
+                <td><span class="item_price">{{price}}</span><!--OrderDetailTotalPrice--></td>
             </tr>
-            <!--//OrderDetailIteration-->
+            {{/order.detailOrders}}<!--//OrderDetailIteration-->
             <tr>
                 <td colspan="4"><strong>Total</strong></td>
-                <td><strong><!--OrderGrandTotalPrice--></strong></td>
+                <td><strong><span class="item_price">{{order.totalPrice}}</span><!--OrderGrandTotalPrice--></strong></td>
             </tr>
             <tr>
                 <td colspan="4"><strong>Total(Include Discount)</strong></td>
-                <td><strong><!--OrderGrandTotal+DiscountPrice--></strong></td>
+                <td><strong><span class="item_price">{{order.totalPrice}}</span><!--OrderGrandTotal+DiscountPrice--></strong></td>
             </tr>
         </table>
         <div class="padding-30px">
             <h4>Shipping Address:</h4>
             <div class="shipping-address">
-                <strong>Name</strong>
-                <p>Alamat,kota/kabupaten,provinsi</p>
-                <p>Kode Pos</p>
-                <div>
-                    <a href="" class="edit ">Edit</a>
-                </div>
+                <strong>{{customer.companyName}}</strong>
+                <p>{{customer.companyAddress}}</p>
+                <p>{{customer.phoneNumber}}</p>
             </div>
             <div class="to-the-right-side">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Order Confirmation</button>
+                <a href="/user/order/history"><button type="button" class="btn btn-default" data-dismiss="modal">Order Confirmation</button></a>
             </div>
         </div>
     </div>

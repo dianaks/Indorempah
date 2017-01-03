@@ -15,11 +15,13 @@
     <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
     <!-- js -->
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/currencyFormatter.min.js"></script>
     <!-- //js -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="/assets/js/move-top.js"></script>
     <script type="text/javascript" src="/assets/js/easing.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() { OSREC.CurrencyFormatter.formatAll( { selector: '.item_price', currency: 'IDR' }); });
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
                 event.preventDefault();
@@ -75,6 +77,16 @@
 <!--contain-->
     <div class="my-cart">
         <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-shopping-cart"></span> My Cart</h4>
+    {{#cartIsNull}}
+        <div class="is-null-pad">
+            <h2>Saat ini cart anda masih kosong!</h2>
+            <div class="padding-30px">
+                <a href="/"><button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button></a>
+            </div>
+        </div>
+
+    {{/cartIsNull}}
+    {{^cartIsNull}}
     <table class="cart-table">
         <tr>
             <th>Image</th>
@@ -88,7 +100,7 @@
         <tr>
             <td><img src="{{product.picture}}"></td>
             <td><!--OrderDetailProductName-->{{product.name}}</td>
-            <td><!--OrderDetailProductPrice-->{{product.firstPrice}}</td>
+            <td><!--OrderDetailProductPrice--><span class="item_price">{{product.firstPrice}}</span></td>
             <td>
                 <form action="" method="get">
                     <input class="floating" type="text" name="quantity" value="{{amount}}"><br>
@@ -96,29 +108,31 @@
                 </form>
                 <form class="quantity-form" value=""></form>
             </td>
-            <td><!--OrderDetailTotalPrice-->{{price}}</td>
+            <td><!--OrderDetailTotalPrice--><span class="item_price">{{price}}</span></td>
             <td>
-                <form action="" method="post">
-                    <button class="delete" value="Delete">Delete</button>
+                <form action="/detail-cart/{{id}}/delete" method="post" class="form-w3agile">
+                    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                    <input type="submit" class="delete" value="Delete">
                 </form>
             </td>
         </tr>
         <!--//DetailCartIteration--> {{/cart.detailCarts}}
         <tr>
             <td colspan="4"><strong>Total</strong></td>
-            <td><strong><!--OrderGrandTotalPrice-->{{cart.totalPrice}}</strong></td>
+            <td><strong><!--OrderGrandTotalPrice--><span class="item_price">{{cart.totalPrice}}</span></strong></td>
             <td></td>
         </tr>
         <tr>
             <td colspan="4"><strong>Total(Include Discount)</strong></td>
-            <td><strong><!--OrderGrandTotal+DiscountPrice-->{{cart.totalPrice}}</strong></td>
+            <td><strong><!--OrderGrandTotal+DiscountPrice--><span class="item_price">{{cart.totalPrice}}</span></strong></td>
             <td></td>
         </tr>
     </table>
         <div class="padding-30px">
             <a href="/"><button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button></a>
-            <a href="/checkout"><button type="button" class="btn btn-default" data-dismiss="modal">Check Out</button></a>
+            <a href="/user/checkout"><button type="button" class="btn btn-default" data-dismiss="modal">Check Out</button></a>
         </div>
+    {{/cartIsNull}}
     </div>
 <!--//contain-->
 <!--footer-->

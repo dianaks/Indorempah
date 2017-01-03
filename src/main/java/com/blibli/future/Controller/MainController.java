@@ -124,14 +124,31 @@ public class MainController {
     }
 
     @RequestMapping("/cart")
-    public String cart(Model model){
+    public String cart(Model model, HttpServletRequest request){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Customer customer = customerRepository.findByUsername(auth.getName());
         model.addAttribute("customer", customer);
+
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
         Cart cart = cartRepo.findByCustomer(customer);
         model.addAttribute("cart", cart);
-        System.out.println(cart.getDetailCarts().get(0).getProduct().getName());
+
+        if(cart == null){
+            model.addAttribute("cartIsNull", true);
+        }
         return "cart";
+    }
+
+    @RequestMapping("/detail-cart/{id}/delete")
+    public String deleteCart(@PathVariable("id") Long id, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Customer customer = customerRepository.findByUsername(auth.getName());
+        model.addAttribute("customer", customer);
+
+        detailCartRepository.delete(id);
+        return "redirect:/cart";
     }
 
     @RequestMapping("/product/{id}")

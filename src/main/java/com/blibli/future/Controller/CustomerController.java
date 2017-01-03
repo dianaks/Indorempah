@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Fransiskus A K on 05/11/2016.
@@ -102,6 +103,7 @@ public class CustomerController {
             detailOrderRepository.save(detailOrder);
         }
         orderRepo.save(order);
+        model.addAttribute("order",order);
         //copy
 
        return "/user/checkout";
@@ -112,11 +114,14 @@ public class CustomerController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean isLoginAsCustomer = auth.isAuthenticated() &&
                 !(auth instanceof AnonymousAuthenticationToken) ;
-        if (isLoginAsCustomer) {
-            Customer customer = customerRepository.findByUsername(auth.getName());
-            model.addAttribute("customer", customer);
-        }
+
+        Customer customer = customerRepository.findByUsername(auth.getName());
+        model.addAttribute("customer", customer);
         model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
+
+        List<Order> order = orderRepo.findByCustomer(customer);
+        model.addAttribute("order",order);
+
         return "/user/history";
     }
 

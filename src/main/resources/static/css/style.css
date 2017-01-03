@@ -134,7 +134,9 @@ tr:nth-child(even) .user-profile-table{
 .margin-50px{
     margin:50px;
 }
-
+.is-null-pad{
+    padding-top: 50px;
+}
 /*edit-page*/
 
 a.button:hover{

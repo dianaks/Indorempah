@@ -15,11 +15,13 @@
     <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
     <!-- js -->
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/currencyFormatter.min.js"></script>
     <!-- //js -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="/assets/js/move-top.js"></script>
     <script type="text/javascript" src="/assets/js/easing.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() { OSREC.CurrencyFormatter.formatAll( { selector: '.item_price', currency: 'IDR' }); });
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
                 event.preventDefault();
@@ -59,12 +61,7 @@
 </head>
 <body>
     <!---header---->
-    {{#isLoginAsCustomer}}
     {{>user/header}}
-    {{/isLoginAsCustomer}}
-    {{^isLoginAsCustomer}}
-    {{>header}}
-    {{/isLoginAsCustomer}}
     <!---//header---->
     <div class="banner-top">
         <div class="container">
@@ -81,30 +78,27 @@
                 <th>Product & Price</th>
                 <th>Status</th>
             </tr>
-            <!--OrderIteration-->
+            {{#order}}<!--OrderIteration-->
             <tr>
-                <td><!--OrderDate--></td>
-                <td><!--OrderId--></td>
+                <td>{{createdDate}}<!--OrderDate--></td>
+                <td>{{id}}<!--OrderId--></td>
                 <td>
-                    <!--OrderDetailIteration-->
+                    {{#detailOrders}}<!--OrderDetailIteration-->
                     <div class="history-order-details">
-                        <img src="">
-                        <strong><!--OrderProductDetailName--></strong>
-                        Quantity: <!--OrderProductDetailQuantity-->
-                        Price: <!--OrderProductDetailPrice-->
+                        <img src="{{product.picture}}">
+                        <strong>{{product.name}}<!--OrderProductDetailName--></strong><br>
+                        Quantity: {{amount}}<!--OrderProductDetailQuantity--><br>
+                        Price: {{product.firstPrice}}<!--OrderProductDetailPrice--><br>
                     </div>
-                    <!--//OrderDetailIteration-->
+                    {{/detailOrders}}<!--//OrderDetailIteration-->
                     <div>
-                        <strong>Total Price: <!--OrderProductPrice--></strong>
+                        <strong>Total Price: {{totalPrice}}<!--OrderProductPrice--></strong>
                     </div>
                 </td>
                 <td><!--OrderStatus--></td>
             </tr>
-            <!--//OrderIteration-->
+            {{/order}}<!--//OrderIteration-->
         </table>
-            <div class="to-the-right-side padding-30px">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Back</button>
-            </div>
     </div>
     <!--//contain--->
     <!---footer---->
