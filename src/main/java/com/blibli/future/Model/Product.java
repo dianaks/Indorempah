@@ -9,16 +9,25 @@ import javax.persistence.*;
 @Entity
 @Table(name="product")
 public class Product {
+    public static final String HERBS="Herbs";
+    public static final String SPICE="Spice";
+    public static final String OTHER="Other";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String unit;
-    private Integer price;
+    private Integer firstPrice;
+    private Integer secondPrice;
+    private Integer firstMinQuantity;
+    private Integer secondMinQuantity;
     private String category;
     private String description;
     private String status = "Available";
     private String picture;
+    @ManyToOne
+    private Merchant merchant;
+    private String amount;
 
     public String getAmount() {
         return amount;
@@ -27,12 +36,6 @@ public class Product {
     public void setAmount(String amount) {
         this.amount = amount;
     }
-
-    private String amount;
-
-    public static final String HERBS="Herbs";
-    public static final String SPICE="Spice";
-    public static final String OTHER="Other";
 
     public long getId() {
         return id;
@@ -56,14 +59,6 @@ public class Product {
 
     public void setUnit(String unit) {
         this.unit = unit;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
     }
 
     public String getCategory() {
@@ -118,4 +113,47 @@ public class Product {
         return this.unit.equals("sack");
     }
 
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
+
+    public Integer getPrice(){
+        return firstPrice;
+    }
+
+    public Integer getFirstPrice() {
+        return firstPrice;
+    }
+
+    public void setFirstPrice(Integer firstPrice) {
+        this.firstPrice = firstPrice;
+    }
+
+    public Integer getSecondPrice() {
+        return secondPrice;
+    }
+
+    public void setSecondPrice(Integer secondPrice) {
+        this.secondPrice = secondPrice;
+    }
+
+    public Integer getFirstMinQuantity() {
+        return firstMinQuantity;
+    }
+
+    public void setFirstMinQuantity(Integer firstMinQuantity) {
+        this.firstMinQuantity = firstMinQuantity;
+    }
+
+    public Integer getSecondMinQuantity() {
+        return secondMinQuantity;
+    }
+
+    public void setSecondMinQuantity(Integer secondMinQuantity) {
+        this.secondMinQuantity = secondMinQuantity;
+    }
 }

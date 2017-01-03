@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Nita on 15/10/2016.
  */
 @Entity
-public class Cart {
+public class Cart{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -57,7 +57,7 @@ public class Cart {
     public void updateTotalPrice(){
         int total = 0;
         for (DetailCart detailCart: this.detailCarts ) {
-            total += detailCart.getProduct().getPrice();
+            total += detailCart.getPrice();
         }
         totalPrice = total;
     }

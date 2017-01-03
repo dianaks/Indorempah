@@ -111,13 +111,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="exkey">
                         <div class="left">
                             <h5>Maximum Amount</h5>
-                            <input  class="form-amount" type="text" value="" name="first-max-amount" required="">
-                            <input  class="form-amount"type="text" value="" name="second-max-amount" required="">
+                            <input  class="form-amount" type="text" value="" name="firstMinQuantity" required="">
+                            <input  class="form-amount"type="text" value="" name="secondMinQuantity" required="">
                         </div>
                         <div class="right">
                             <h5>Price</h5>
-                            <input class="form-price" type="text" value="" name="first-price" required="">
-                            <input class="form-price" type="text" value="" name="second-price" required="">
+                            <input class="form-price" type="text" value="" name="firstPrice" required="">
+                            <input class="form-price" type="text" value="" name="secondPrice" required="">
                         </div>
                         <h5>Product Unit</h5>
                         <div>
@@ -131,6 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="clearfix"></div>
                     </div>
                     <input type="submit" value="Upload">
+                    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
                     <a href="/merchant/product" class="button"> Cancel</a>
                 </form>
             </div>
@@ -159,43 +160,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="/assets/js/bootstrap.js"></script>
     <!-- //for bootstrap working -->
     <script type='text/javascript' src="/assets/js/jquery.mycart.js"></script>
-    <script type="text/javascript">
-        $(function () {
-
-            var goToCartIcon = function($addTocartBtn){
-                var $cartIcon = $(".my-cart-icon");
-                var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
-                $addTocartBtn.prepend($image);
-                var position = $cartIcon.position();
-                $image.animate({
-                    top: position.top,
-                    left: position.left
-                }, 500 , "linear", function() {
-                    $image.remove();
-                });
-            };
-            $('.my-cart-btn').myCart({
-                classCartIcon: 'my-cart-icon',
-                classCartBadge: 'my-cart-badge',
-                affixCartIcon: true,
-                checkoutCart: function(products) {
-                    $.each(products, function(){
-                        console.log(this);
-                    });
-                },
-                clickOnAddToCart: function($addTocart){
-                    goToCartIcon($addTocart);
-                },
-                getDiscountPrice: function(products) {
-                    var total = 0;
-                    $.each(products, function(){
-                        total += this.quantity * this.price;
-                    });
-                    return total * 1;
-                }
-            });
-
-        });
-    </script>
 </body>
 </html>

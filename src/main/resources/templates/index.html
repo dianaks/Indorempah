@@ -20,12 +20,14 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Custom Theme files -->
 <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
 <!-- js -->
-   <script src="/assets/js/jquery-1.11.1.min.js"></script>
+	<script src="/assets/js/jquery-1.11.1.min.js"></script>
+	<script src="/assets/js/currencyFormatter.min.js"></script>
 <!-- //js -->
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="/assets/js/move-top.js"></script>
 <script type="text/javascript" src="/assets/js/easing.js"></script>
 <script type="text/javascript">
+    $(document).ready(function() { OSREC.CurrencyFormatter.formatAll( { selector: '.item_price', currency: 'IDR' }); });
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){
 			event.preventDefault();
@@ -78,8 +80,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <div data-vide-bg="video/video">
     <div class="container">
 		<div class="banner-info">
-			<h3>It is a long established fact that a reader will be distracted by 
-			the readable </h3>	
+			<h3>Indonesian Herbs and Spices, We serve both quality and quantity.</h3>
 			<div class="search-form">
 				<form action="#" method="post">
 					<input type="text" placeholder="Search..." name="Search...">
@@ -127,7 +128,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											<h6><a href="single.html">{{name}}</a>({{unit}})</h6>
 										</div>
 										<div class="mid-2">
-											<p ><label>{{price}}</label><em class="item_price">{{price}}</em></p>
+											<p ><em class="item_price">{{firstPrice}}</em></p>
 											  <div class="block">
 												<div class="starbox small ghosting"> </div>
 											</div>
@@ -157,7 +158,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											<h6><a href="single.html">{{name}}</a>({{unit}})</h6>
 										</div>
 										<div class="mid-2">
-											<p ><label>{{price}}</label><em class="item_price">{{price}}</em></p>
+											<p ><em class="item_price">{{firstPrice}}</em></p>
 											  <div class="block">
 												<div class="starbox small ghosting"> </div>
 											</div>
@@ -187,7 +188,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											<h6><a href="single.html">{{name}}</a>({{unit}})</h6>
 										</div>
 										<div class="mid-2">
-											<p ><label>{{price}}</label><em class="item_price">{{price}}</em></p>
+											<p ><em class="item_price">{{firstPrice}}</em></p>
 											  <div class="block">
 												<div class="starbox small ghosting"> </div>
 											</div>
@@ -285,9 +286,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
       }, 500 , "linear", function() {
         $image.remove();
       });
-    };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    $('.my-cart-btn').myCart({
+    };
+      $('.my-cart-btn').myCart({
       classCartIcon: 'my-cart-icon',
       classCartBadge: 'my-cart-badge',
       affixCartIcon: true,

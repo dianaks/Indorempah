@@ -1,8 +1,7 @@
 package com.blibli.future.Controller;
 
-import com.blibli.future.Model.Customer;
-import com.blibli.future.repository.CustomerRepository;
-import com.blibli.future.repository.UserRoleRepository;
+import com.blibli.future.Model.*;
+import com.blibli.future.repository.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * Created by Fransiskus A K on 05/11/2016.
@@ -27,6 +27,13 @@ public class CustomerController {
     CustomerRepository customerRepository;
     @Autowired
     UserRoleRepository userRoleRepository;
+    @Autowired
+    CartRepository cartRepo;
+    @Autowired
+    OrderRepository orderRepo;
+    @Autowired
+    DetailOrderRepository detailOrderRepository;
+
 //    @Autowired
 //    ProductRepository productRepo;
 //
@@ -65,16 +72,39 @@ public class CustomerController {
     }
 
     @RequestMapping("/user/checkout")
-    public String userCheckout (Model model){
+    public String userCheckout (Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean isLoginAsCustomer = auth.isAuthenticated() &&
-                !(auth instanceof AnonymousAuthenticationToken) ;
+                !(auth instanceof AnonymousAuthenticationToken);
+        Customer customer = null;
         if (isLoginAsCustomer) {
-            Customer customer = customerRepository.findByUsername(auth.getName());
+            customer = customerRepository.findByUsername(auth.getName());
             model.addAttribute("customer", customer);
         }
         model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
-        return "/user/checkout";
+
+       Order order = new Order();
+       // Mengambil object cart yang ada di repositori cart
+       Cart cart = cartRepo.findByCustomer(customer);
+
+       order.setTotalPrice(cart.getTotalPrice());
+       order.setCreatedDate(new Date());
+       order.setCustomer(customer);
+       orderRepo.save(order);
+        // Untuk setiap DC yang ada didalam Cart, dapatkan detail cart
+        for (DetailCart detailCart: cart.getDetailCarts()) {
+            DetailOrder detailOrder = new DetailOrder();
+            detailOrder.setAmount(detailCart.getAmount());
+            detailOrder.setPrice(detailCart.getPrice());
+            detailOrder.setProduct(detailCart.getProduct());
+
+            detailOrder.setOrder(order);
+            detailOrderRepository.save(detailOrder);
+        }
+        orderRepo.save(order);
+        //copy
+
+       return "/user/checkout";
     }
 
     @RequestMapping("/user/order/history")

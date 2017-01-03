@@ -44,11 +44,22 @@ public class DetailCart {
     }
 
     public Integer getPrice() {
-        return amount*product.getPrice();
+        return this.price;
     }
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public void updatePrice(){
+        int price = 0;
+        if(amount>product.getSecondMinQuantity()){
+            price = product.getFirstPrice();
+        }
+        else{
+            price = product.getSecondPrice();
+        }
+        this.price = amount*price;
     }
 
     public Cart getCart() {

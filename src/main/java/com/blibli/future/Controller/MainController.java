@@ -168,7 +168,7 @@ public class MainController {
         DetailCart detailCart = new DetailCart();
         detailCart.setProduct(orderedProduct);
         detailCart.setAmount(1);
-        detailCart.setPrice(orderedProduct.getPrice());
+        detailCart.updatePrice();
         detailCartRepository.save(detailCart);
         detailCart.setCart(cart);
         detailCartRepository.save(detailCart);

@@ -15,11 +15,13 @@
     <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
     <!-- js -->
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/currencyFormatter.min.js"></script>
     <!-- //js -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="/assets/js/move-top.js"></script>
     <script type="text/javascript" src="/assets/js/easing.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() { OSREC.CurrencyFormatter.formatAll( { selector: '.item_price', currency: 'IDR' }); });
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
                 event.preventDefault();
@@ -84,16 +86,56 @@
             </div>
             <div class="col-md-8 product-detail">
                 <h3>{{name}}</h3><br>
-                <p>Category : {{category}}<br>
-                Description : {{description}}<br>
-                Price : /{{unit}}<br>
-                Status : </p>
+                <table class="product-table">
+                    <tr>
+                        <td nowrap><b>Category</b></td>
+                        <td>:</td>
+                        <td>{{category}}</td>
+                    </tr>
+                    <tr>
+                        <td nowrap><b>Description</b></td>
+                        <td>:</td>
+                        <td>{{description}}</td>
+                    </tr>
+                    <tr>
+                        <td nowrap><b>First Min Quantity</b></td>
+                        <td>:</td>
+                        <td>{{firstMinQuantity}}</td>
+                    </tr>
+                    <tr>
+                        <td nowrap><b>First Price</b></td>
+                        <td>:</td>
+                        <td><span class ="item_price">{{firstPrice}}</span>/{{unit}}</td>
+                    </tr>
+                    <tr>
+                        <td nowrap><b>Second Min Quantity</b></td>
+                        <td>:</td>
+                        <td>{{secondMinQuantity}}</td>
+                    </tr>
+                    <tr>
+                        <td nowrap><b>Second Price</b></td>
+                        <td>:</td>
+                        <td><span class ="item_price">{{secondPrice}}</span>/{{unit}}</td>
+                    </tr>
+                    <tr>
+                        <td nowrap><b>Status</b></td>
+                        <td>:</td>
+                        <td>{{status}}</td>
+                    </tr>
+                </table>
+
             </div>
-            <a href="/merchant/product/{{id}}/edit" class="edit">Edit</a>
-            <form action="/merchant/product/{{id}}/delete" method="post">
-                <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-                <button class="delete" value="Delete">Delete</button>
-            </form>
+            <div class="col-md-4 col-md-offset-8 inline-button">
+                <form action="/merchant/product/{{id}}/edit" method="submit" class="form-w3agile">
+                    <input type="submit" class="edit" value="Edit">
+                </form>
+
+                <form action="/merchant/product/{{id}}/delete" method="post" class="form-w3agile">
+                    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                    <input type="submit" class="delete" value="Delete">
+                </form>
+            </div>
+
         </div>
         {{/products}}
 </div>

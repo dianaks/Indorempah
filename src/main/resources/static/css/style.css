@@ -191,43 +191,29 @@ a.button {
     -ms-transition: .5s ease-in-out;
 }
 
-.edit{
-    background-color: white; /* Green */
-    border: 1px solid #4CAF50;
-    color: #4CAF50;
-    text-decoration: none;
-    outline: none;
-    font-size: 1em;
-    padding: 3px 10px;
-    width:70px;
-    margin-top: 1em;
+/*--button--*/
+.inline-button form{
+    display: inline-block;
+    width:100px;
+}
+.inline-button .form-w3agile input[type="submit"]{
+    width:100%;
+}
+.inline-button .form-w3agile input[type="submit"].delete{
+    background: #ed0612;
+    color: #FFFFFF;
+}
+.inline-button .form-w3agile input[type="submit"].edit{
+    background: #039445;
+    color: #FFFFFF;
 }
 
-.edit:hover{
-    background-color: #4CAF50; /* Green */
-    border: 1px solid #4CAF50;
-    color: white;
-    text-decoration: none;
+.inline-button .form-w3agile input[type="submit"].edit:hover,
+.inline-button .form-w3agile input[type="submit"].delete:hover{
+    background: #fdb515;
+    color: #FFFFFF;
 }
 
-.delete{
-    background-color: white; /* Green */
-    border: 1px solid red;
-    color: red;
-    text-decoration: none;
-    outline: none;
-    font-size: 1em;
-    padding: 3px 10px;
-    width:70px;
-    margin-top: 1em;
-}
-
-.delete:hover{
-    background-color: red; /* Green */
-    border: 1px solid red;
-    color: white;
-    text-decoration: none;
-}
 
 
 /*--popup--*/
@@ -2072,6 +2058,9 @@ a#myTabDrop1 {
 	margin-bottom:0;
 }
 /*--//login--*/
+.product-table td{
+    border: none !important;
+}
 /*--checkout--*/
 .check-out{
 	padding:6em 0;

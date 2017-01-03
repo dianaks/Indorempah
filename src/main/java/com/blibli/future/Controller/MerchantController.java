@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,7 +68,9 @@ public class MerchantController {
         return "redirect:/merchant";
     }
     @RequestMapping("merchant/product/upload")
-    public String greeting8(){
+    public String greeting8(HttpServletRequest request,Model model){
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
         return "merchant/upload"; }
 
     @PostMapping("merchant/product/save")
@@ -82,9 +86,10 @@ public class MerchantController {
                 if (!dir.exists())
                     dir.mkdirs();
 
+                long timeStamp = System.currentTimeMillis();
                 // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + newProduct.getName() +".jpg");
+                File serverFile = new File("D:\\xampp\\htdocs\\picture\\" +
+                        newProduct.getName() + timeStamp + ".jpg");
                 BufferedOutputStream stream = new BufferedOutputStream(
                         new FileOutputStream(serverFile));
                 stream.write(bytes);
@@ -92,18 +97,22 @@ public class MerchantController {
 
                 System.out.println("Server File Location="
                         + serverFile.getAbsolutePath());
-
-                System.out.println("You successfully uploaded file=" + newProduct.getName() +".jpg");
-                newProduct.setPicture(serverFile.getAbsolutePath());
+                newProduct.setPicture("http://localhost/picture/" + newProduct.getName() + timeStamp + ".jpg");
             } catch (Exception e) {
                 return "You failed to upload " + newProduct.getName() +".jpg" + " => " + e.getMessage();
             }
         } else {
             System.out.println("You failed to upload " + newProduct.getName() +".jpg" + " because the file was empty.");
         }
+        Merchant merchant;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        merchant = merchantRepo.findByUsername(auth.getName());
+        model.addAttribute("merchant", merchant);
 
+        newProduct.setMerchant(merchant);
         productRepo.save(newProduct);
         model.addAttribute("newProduct",newProduct);
+
         return "redirect:/merchant/product";
     }
 
@@ -146,5 +155,15 @@ public class MerchantController {
 
         return "redirect:/merchant/product";
     }
+
+    @RequestMapping(value="/merchant/logout")
+    public String logoutMerchant(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login";
+    }
+
 
 }
