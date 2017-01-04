@@ -1,10 +1,11 @@
 package com.blibli.future.Controller;
 
-import com.blibli.future.Model.Cart;
 import com.blibli.future.Model.Customer;
-import com.blibli.future.Model.DetailCart;
 import com.blibli.future.Model.Product;
-import com.blibli.future.repository.*;
+import com.blibli.future.repository.CartRepository;
+import com.blibli.future.repository.CustomerRepository;
+import com.blibli.future.repository.ProductRepository;
+import com.blibli.future.repository.UserRoleRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,25 +27,22 @@ import java.util.List;
 @Controller
 public class MainController {
     @Autowired
-    UserRoleRepository userRoleRepo;
+    UserRoleRepository userRoleRepository;
     @Autowired
-    ProductRepository productRepo;
+    ProductRepository productRepository;
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private CartRepository cartRepo;
-    @Autowired
-    private DetailCartRepository detailCartRepository;
-
+    private CartRepository cartRepository;
 
     private Logger log = Logger.getLogger(MainController.class.getName());
 
     @RequestMapping("/")
     public String home (Model model) {
 
-        List<Product> otherProduct = productRepo.findByCategory(Product.OTHER);
-        List<Product> spiceProduct = productRepo.findByCategory(Product.SPICE);
-        List<Product> herbsProduct = productRepo.findByCategory(Product.HERBS);
+        List<Product> otherProduct = productRepository.findByCategory(Product.OTHER);
+        List<Product> spiceProduct = productRepository.findByCategory(Product.SPICE);
+        List<Product> herbsProduct = productRepository.findByCategory(Product.HERBS);
 
         model.addAttribute("herbsProduct",herbsProduct);
         model.addAttribute("spiceProduct",spiceProduct);
@@ -72,7 +70,7 @@ public class MainController {
     @RequestMapping("/herbs")
     public String herbs (Model model) {
 
-        List<Product> herbsProduct = productRepo.findByCategory(Product.HERBS);
+        List<Product> herbsProduct = productRepository.findByCategory(Product.HERBS);
         model.addAttribute("herbsProduct",herbsProduct);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -90,7 +88,7 @@ public class MainController {
     @RequestMapping("/spices")
     public String spice (Model model) {
 
-        List<Product> spiceProduct = productRepo.findByCategory(Product.SPICE);
+        List<Product> spiceProduct = productRepository.findByCategory(Product.SPICE);
         model.addAttribute("spiceProduct",spiceProduct);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -108,7 +106,7 @@ public class MainController {
     @RequestMapping("/others")
     public String other (Model model) {
 
-        List<Product> otherProduct = productRepo.findByCategory(Product.OTHER);
+        List<Product> otherProduct = productRepository.findByCategory(Product.OTHER);
         model.addAttribute("otherProduct",otherProduct);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -123,77 +121,12 @@ public class MainController {
         return "others";
     }
 
-    @RequestMapping("/cart")
-    public String cart(Model model, HttpServletRequest request){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Customer customer = customerRepository.findByUsername(auth.getName());
-        model.addAttribute("customer", customer);
-
-        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-        model.addAttribute("_csrf", _csrf);
-
-        Cart cart = cartRepo.findByCustomer(customer);
-        model.addAttribute("cart", cart);
-
-        if(cart == null){
-            model.addAttribute("cartIsNull", true);
-        }
-        return "cart";
-    }
-
-    @RequestMapping("/detail-cart/{id}/delete")
-    public String deleteCart(@PathVariable("id") Long id, Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Customer customer = customerRepository.findByUsername(auth.getName());
-        model.addAttribute("customer", customer);
-
-        detailCartRepository.delete(id);
-        return "redirect:/cart";
-    }
-
     @RequestMapping("/product/{id}")
     public String productDetail(@PathVariable String id, Model model){
 
-        Product detailProduct = productRepo.findOne(Long.parseLong(id));
+        Product detailProduct = productRepository.findOne(Long.parseLong(id));
         model.addAttribute("product", detailProduct);
 
         return "product-details";
     }
-
-    @RequestMapping("/product/in/{id}")
-    public String productOrder(@PathVariable String id, Model model){
-        // Cari produk yang diinginkan
-        Product orderedProduct = productRepo.findOne(Long.parseLong(id));
-
-        // Apakah sudah customer sudah login
-
-        // Cek apa customer yang sedang login sudah punya cart
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Customer customer = customerRepository.findByUsername(auth.getName());
-        model.addAttribute("customer", customer);
-        Cart cart = cartRepo.findByCustomer(customer);
-
-
-        // Jika belum, buat cart baru dan masukkan produk
-        if(cart == null){
-            cart = new Cart();
-            cart.setCustomer(customer);
-            cartRepo.save(cart);
-        }
-
-        // tambahkan produk ke dalam cart
-        DetailCart detailCart = new DetailCart();
-        detailCart.setProduct(orderedProduct);
-        detailCart.setAmount(1);
-        detailCart.updatePrice();
-        detailCartRepository.save(detailCart);
-        detailCart.setCart(cart);
-        detailCartRepository.save(detailCart);
-
-        cart.updateTotalPrice();
-        cartRepo.save(cart);
-
-        return "redirect:/cart";
-    }
-
 }

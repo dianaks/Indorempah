@@ -100,31 +100,34 @@
         <tr>
             <td><img src="{{product.picture}}"></td>
             <td><!--OrderDetailProductName-->{{product.name}}</td>
-            <td><!--OrderDetailProductPrice--><span class="item_price">{{product.firstPrice}}</span></td>
+            <td><!--OrderDetailProductPrice--><span class="item_price">{{EachPrice}}</span></td>
             <td>
-                <form action="" method="get">
-                    <input class="floating" type="text" name="quantity" value="{{amount}}"><br>
-                    <!--<input class="floating" type="submit" value="Submit">-->
+                <form action="/detail-cart/update" method="post" class="form-w3agile table-button">
+                    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                    <input type="hidden" name="id" value="{{id}}"/>
+                    <input class="floating" type="text" name="amount" value="{{amount}}"><br>
+                    <input type="submit" class="edit" value="Update">
                 </form>
-                <form class="quantity-form" value=""></form>
             </td>
             <td><!--OrderDetailTotalPrice--><span class="item_price">{{price}}</span></td>
             <td>
-                <form action="/detail-cart/{{id}}/delete" method="post" class="form-w3agile">
-                    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-                    <input type="submit" class="delete" value="Delete">
-                </form>
+                <div class="inline-button">
+                    <form action="/detail-cart/{{id}}/delete" method="post" class="form-w3agile table-button">
+                        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                        <input type="submit" class="delete" value="Delete">
+                    </form>
+                </div>
             </td>
         </tr>
         <!--//DetailCartIteration--> {{/cart.detailCarts}}
         <tr>
             <td colspan="4"><strong>Total</strong></td>
-            <td><strong><!--OrderGrandTotalPrice--><span class="item_price">{{cart.totalPrice}}</span></strong></td>
+            <td><strong><!--OrderGrandTotalPrice--><span class="item_price">{{cart.TotalPrice}}</span></strong></td>
             <td></td>
         </tr>
         <tr>
             <td colspan="4"><strong>Total(Include Discount)</strong></td>
-            <td><strong><!--OrderGrandTotal+DiscountPrice--><span class="item_price">{{cart.totalPrice}}</span></strong></td>
+            <td><strong><!--OrderGrandTotal+DiscountPrice--><span class="item_price">{{cart.TotalPrice}}</span></strong></td>
             <td></td>
         </tr>
     </table>

@@ -84,22 +84,22 @@
                 <th>Quantity</th>
                 <th>Total Price</th>
             </tr>
-            {{#order.detailOrders}}<!--OrderDetailIteration-->
+            {{#cart.detailCarts}}<!--OrderDetailIteration-->
             <tr>
                 <td><img src="{{product.picture}}"></td>
                 <td>{{product.name}}<!--OrderDetailProductName--></td>
-                <td><span class="item_price">{{product.firstPrice}}</span><!--OrderDetailProductPrice--></td>
+                <td><span class="item_price">{{EachPrice}}</span><!--OrderDetailProductPrice--></td>
                 <td>{{amount}}<!--OrderDetailQuantity--></td>
                 <td><span class="item_price">{{price}}</span><!--OrderDetailTotalPrice--></td>
             </tr>
-            {{/order.detailOrders}}<!--//OrderDetailIteration-->
+            {{/cart.detailCarts}}<!--//OrderDetailIteration-->
             <tr>
                 <td colspan="4"><strong>Total</strong></td>
-                <td><strong><span class="item_price">{{order.totalPrice}}</span><!--OrderGrandTotalPrice--></strong></td>
+                <td><strong><span class="item_price">{{cart.totalPrice}}</span><!--OrderGrandTotalPrice--></strong></td>
             </tr>
             <tr>
                 <td colspan="4"><strong>Total(Include Discount)</strong></td>
-                <td><strong><span class="item_price">{{order.totalPrice}}</span><!--OrderGrandTotal+DiscountPrice--></strong></td>
+                <td><strong><span class="item_price">{{cart.totalPrice}}</span><!--OrderGrandTotal+DiscountPrice--></strong></td>
             </tr>
         </table>
         <div class="padding-30px">
@@ -110,7 +110,7 @@
                 <p>{{customer.phoneNumber}}</p>
             </div>
             <div class="to-the-right-side">
-                <a href="/user/order/history"><button type="button" class="btn btn-default" data-dismiss="modal">Order Confirmation</button></a>
+                <a href="/user/order/confirmation"><button type="button" class="btn btn-default" data-dismiss="modal">Order Confirmation</button></a>
             </div>
         </div>
     </div>

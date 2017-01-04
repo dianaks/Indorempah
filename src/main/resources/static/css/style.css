@@ -193,31 +193,6 @@ a.button {
     -ms-transition: .5s ease-in-out;
 }
 
-/*--button--*/
-.inline-button form{
-    display: inline-block;
-    width:100px;
-}
-.inline-button .form-w3agile input[type="submit"]{
-    width:100%;
-}
-.inline-button .form-w3agile input[type="submit"].delete{
-    background: #ed0612;
-    color: #FFFFFF;
-}
-.inline-button .form-w3agile input[type="submit"].edit{
-    background: #039445;
-    color: #FFFFFF;
-}
-
-.inline-button .form-w3agile input[type="submit"].edit:hover,
-.inline-button .form-w3agile input[type="submit"].delete:hover{
-    background: #fdb515;
-    color: #FFFFFF;
-}
-
-
-
 /*--popup--*/
 .agileits {
     padding: 3em;
@@ -3384,4 +3359,42 @@ h1.t-button {
     font-size: 13px;
 }
 
+}
+
+/*--button--*/
+.inline-button form{
+    display: inline-block;
+    width:100px;
+}
+.inline-button .form-w3agile input[type="submit"]{
+    width:100%;
+}
+.inline-button .form-w3agile input[type="submit"].delete{
+    background: #ed0612;
+    color: #FFFFFF;
+}
+.inline-button .form-w3agile input[type="submit"].edit{
+    background: #039445;
+    color: #FFFFFF;
+}
+.table-button input[type="submit"]{
+    margin-buttom: 0px;
+    width: 70px;
+    margin-top: 10px;
+}
+.table-button input[type="submit"].edit{
+    background: #039445;
+    color: #FFFFFF;
+}
+.table-button input[type="submit"].delete{
+    color: #FFFFFF;
+    width: 70px;
+}
+
+.inline-button .form-w3agile input[type="submit"].edit:hover,
+.inline-button .form-w3agile input[type="submit"].delete:hover,
+.table-button input[type="submit"].delete:hover,
+.table-button input[type="submit"].edit:hover{
+    background: #fdb515;
+    color: #FFFFFF;
 }

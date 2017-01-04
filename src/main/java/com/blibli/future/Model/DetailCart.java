@@ -51,13 +51,24 @@ public class DetailCart {
         this.price = price;
     }
 
+    public Integer getEachPrice(){
+        int price = 0;
+        if(amount>product.getSecondMinQuantity()){
+            price = product.getSecondPrice();
+        }
+        else{
+            price = product.getFirstPrice();
+        }
+        return price;
+    }
+
     public void updatePrice(){
         int price = 0;
         if(amount>product.getSecondMinQuantity()){
-            price = product.getFirstPrice();
+            price = product.getSecondPrice();
         }
         else{
-            price = product.getSecondPrice();
+            price = product.getFirstPrice();
         }
         this.price = amount*price;
     }

@@ -85,14 +85,14 @@
                 <td>
                     {{#detailOrders}}<!--OrderDetailIteration-->
                     <div class="history-order-details">
-                        <img src="{{product.picture}}">
+                        <img src="{{product.picture}}"><br>
                         <strong>{{product.name}}<!--OrderProductDetailName--></strong><br>
-                        Quantity: {{amount}}<!--OrderProductDetailQuantity--><br>
-                        Price: {{product.firstPrice}}<!--OrderProductDetailPrice--><br>
+                        Quantity: {{amount}} {{product.unit}}<!--OrderProductDetailQuantity--><br>
+                        Price: <span class="item_price">{{product.firstPrice}}</span><!--OrderProductDetailPrice--><br>
                     </div>
                     {{/detailOrders}}<!--//OrderDetailIteration-->
                     <div>
-                        <strong>Total Price: {{totalPrice}}<!--OrderProductPrice--></strong>
+                        <strong>Total Price: <span class="item_price">{{totalPrice}}</span><!--OrderProductPrice--></strong>
                     </div>
                 </td>
                 <td><!--OrderStatus--></td>
