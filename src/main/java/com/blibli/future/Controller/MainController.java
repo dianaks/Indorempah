@@ -1,11 +1,10 @@
 package com.blibli.future.Controller;
 
 import com.blibli.future.Model.Customer;
+import com.blibli.future.Model.Merchant;
 import com.blibli.future.Model.Product;
-import com.blibli.future.repository.CartRepository;
-import com.blibli.future.repository.CustomerRepository;
-import com.blibli.future.repository.ProductRepository;
-import com.blibli.future.repository.UserRoleRepository;
+import com.blibli.future.Model.User;
+import com.blibli.future.repository.*;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +33,8 @@ public class MainController {
     private CustomerRepository customerRepository;
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private Logger log = Logger.getLogger(MainController.class.getName());
 
@@ -65,6 +66,25 @@ public class MainController {
         model.addAttribute("_csrf", _csrf);
 
         return "login" ;
+    }
+
+    @RequestMapping("/login/process")
+    public String loginProcess (Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoggedIn = auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken);
+        User u = userRepository.findByUsername(auth.getName());
+
+        if(u instanceof Customer) {
+
+            return "redirect:/";
+
+        } else if (u instanceof Merchant) {
+
+            return "redirect:/merchant";
+        }
+
+        return "redirect:/";
     }
 
     @RequestMapping("/herbs")

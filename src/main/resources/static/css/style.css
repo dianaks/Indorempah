@@ -129,6 +129,7 @@ tr:nth-child(even) .user-profile-table{
 }
 .to-the-right-side{
     text-align: right;
+    float: right;
 }
 /*product-detail*/
 .margin-50px{
@@ -3397,4 +3398,16 @@ h1.t-button {
 .table-button input[type="submit"].edit:hover{
     background: #fdb515;
     color: #FFFFFF;
+}
+
+/* Image */
+
+.img-thumbnail{
+    height:110px;
+    border: 0px;
+    border-radius: 0px;
+    display: flex;
+}
+.bg-set{
+    background-image:url("../images/sp2.jpg");
 }

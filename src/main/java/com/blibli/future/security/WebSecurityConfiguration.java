@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -25,16 +26,24 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/register")
-                .permitAll()
+                    .permitAll()
+                .antMatchers("/user/**")
+                    .access("hasRole('ROLE_USER')")
+                .antMatchers("/merchant/**")
+                    .access("hasRole('ROLE_MERCHANT')")
                 .anyRequest()
                     .permitAll()
-                .and()
+                    .and()
                 .formLogin().loginPage("/login")
-                .permitAll()
-
-                .and()
+                    .successForwardUrl("/login/process")
+                    .permitAll()
+                    .and()
                 .logout()
-                .permitAll() ;
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .permitAll()
+                    .and()
+
+        ;
 
     }
     @Autowired

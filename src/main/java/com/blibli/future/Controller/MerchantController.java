@@ -50,7 +50,7 @@ public class MerchantController {
         model.addAttribute("isLoginAsMerchant", isLoginAsMerchant);
         return"merchant/merchant-home";
     }
-    @RequestMapping("/merchant/register")
+    @RequestMapping("/register/merchant")
     public String register (HttpServletRequest request, Model model) {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
@@ -58,7 +58,7 @@ public class MerchantController {
         return "merchant/register" ;
     }
 
-    @PostMapping("/merchant/register")
+    @PostMapping("/register/merchant")
     public String registerNewUser(@ModelAttribute Merchant merchant, Model model){
         merchant.createUserRoleEntry(userRoleRepository);
         merchantRepo.save(merchant) ;
@@ -67,6 +67,12 @@ public class MerchantController {
         model.addAttribute("newUser", merchant);
         return "redirect:/merchant";
     }
+
+    @RequestMapping("merchant/profile/edit")
+    public String merchantEditProfile(Model model){
+        return"merchant/edit-profile";
+    }
+
     @RequestMapping("merchant/product/upload")
     public String greeting8(HttpServletRequest request,Model model){
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();

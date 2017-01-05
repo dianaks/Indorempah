@@ -86,10 +86,10 @@
             </tr>
             {{#cart.detailCarts}}<!--OrderDetailIteration-->
             <tr>
-                <td><img src="{{product.picture}}"></td>
+                <td><img src="{{product.picture}}" class="img-thumbnail"></td>
                 <td>{{product.name}}<!--OrderDetailProductName--></td>
                 <td><span class="item_price">{{EachPrice}}</span><!--OrderDetailProductPrice--></td>
-                <td>{{amount}}<!--OrderDetailQuantity--></td>
+                <td>{{amount}} {{product.unit}}<!--OrderDetailQuantity--></td>
                 <td><span class="item_price">{{price}}</span><!--OrderDetailTotalPrice--></td>
             </tr>
             {{/cart.detailCarts}}<!--//OrderDetailIteration-->

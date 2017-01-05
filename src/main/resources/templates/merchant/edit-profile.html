@@ -58,63 +58,61 @@
     <!---//End-rate---->
 </head>
 <body>
-    <!--header-->
-    {{#isLoginAsCustomer}}
-    {{>user/header}}
-    {{/isLoginAsCustomer}}
-    {{^isLoginAsCustomer}}
-    {{>header}}
-    {{/isLoginAsCustomer}}
-    <!--/header-->
-
-    <!--banner-->
-    <div class="banner-top">
-        <div class="container">
-            <h3 >Profile</h3>
-            <h4><a href="index.html">Home</a><label>/</label>Profile</h4>
-            <div class="clearfix"> </div>
-        </div>
+<!--header-->
+{{#isLoginAsCustomer}}
+{{>user/header}}
+{{/isLoginAsCustomer}}
+{{^isLoginAsCustomer}}
+{{>header}}
+{{/isLoginAsCustomer}}
+<!--//header-->
+<div class="banner-top">
+    <div class="container">
+        <h3 >Edit Profile</h3>
+        <h4><a href="../index.html">Profile</a><label>/</label>Edit</h4>
+        <div class="clearfix"> </div>
     </div>
-
-    <!--login-->
-
-    <div class="login">
+</div>
+    <div class="edit-profile">
         <div class="main-agileits">
-            <div class="form-w3agile form1">
-                <h3>Profile</h3>
-                    <div class="user-profile-picture">
-                        <img class="profile-picture" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Blank_square.svg/2000px-Blank_square.svg.png">
-                    </div>
-                <table class="user-profile-table">
-                    <tr>
-                        <td>Username</td>
-                        <td>{{customer.username}}<!--Username--></td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td>{{customer.password}}<!--Password--></td>
-                    </tr>
-                    <tr>
-                        <td>Company Name</td>
-                        <td>{{customer.companyName}}<!--Company Name--></td>
-                    </tr>
+            <div class="form-w3agile">
+                <h3>Edit Profile</h3>
 
-                    <tr>
-                        <td>Company Address</td>
-                        <td>{{customer.companyAddress}}<!--CompanyAddress--></td>
-                    </tr>
-                    <tr>
-                        <td>Company Phone</td>
-                        <td>{{customer.phoneNumber}}<!--CompanyPhone--></td>
-                    </tr>
-                </table>
-                <div class="to-the-right-side">
-                    <a href="/user/profile/edit" class="button">Edit</a>
-                </div>
+                <form action="save" method="post" modelAttribute="Product" enctype="multipart/form-data">
+                    <h4>Profile Image</h4>
+                    <div class="image-thumbnail">
+                        <img src="" class="profile-picture">
+                    </div>
+                    <div class="key noborder">
+                        <input type="file" name="imagefile" accept="image/*">
+                        <div class="clearfix"></div>
+                    </div>
+                    <h4>Company Description</h4>
+                    <div class="key">
+                        <input  type="text" value="" name="description" required="">
+                        <!--name harus sama dengan nama atribut class-->
+                        <div class="clearfix"></div>
+                    </div>
+                    <h4>Company Phone</h4>
+                    <div class="key">
+                        <input  type="text" value="" name="name" required="">
+                        <div class="clearfix"></div>
+                    </div>
+                    <h4>Company Address</h4>
+                    <div class="key">
+                        <input  type="text" value="" name="Address" required="">
+                        <!--name harus sama dengan nama atribut class-->
+                        <div class="clearfix"></div>
+                    </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <input class="button" type="submit" value="Save">
+                    <a href="" class="button"> Cancel</a>
+
+                </form>
+            </div>
         </div>
     </div>
-    <!--footer-->
-    {{>footer}}
-    <!-- //footer-->
+
 </body>
 </html>

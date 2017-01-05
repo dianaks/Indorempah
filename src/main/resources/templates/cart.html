@@ -98,14 +98,14 @@
         </tr>
         <!--DetailCartIteration--> {{#cart.detailCarts}}
         <tr>
-            <td><img src="{{product.picture}}"></td>
+            <td><img src="{{product.picture}}" class="img-thumbnail"></td>
             <td><!--OrderDetailProductName-->{{product.name}}</td>
             <td><!--OrderDetailProductPrice--><span class="item_price">{{EachPrice}}</span></td>
             <td>
                 <form action="/detail-cart/update" method="post" class="form-w3agile table-button">
                     <input type="hidden" name="_csrf" value="{{_csrf}}"/>
                     <input type="hidden" name="id" value="{{id}}"/>
-                    <input class="floating" type="text" name="amount" value="{{amount}}"><br>
+                    <input type="text" name="amount" value="{{amount}}"> {{product.unit}}
                     <input type="submit" class="edit" value="Update">
                 </form>
             </td>

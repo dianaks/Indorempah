@@ -209,7 +209,7 @@ public class DatabaseSeeder {
         x.setFirstMinQuantity(1);
         x.setSecondMinQuantity(10);
         x.setStatus("Available");
-        x.setPicture("http://kiosmakanansehat.com/wp-content/uploads/2016/08/daun-mint.jpg");
+        x.setPicture("http://3.bp.blogspot.com/-4lx2fg_XF9s/VeGOX-FVFxI/AAAAAAAAFuI/Mc84mjKuVI0/s1600/daun%2Bmint.png");
         x.setAmount("10");
         x.setMerchant(ada);
         productRepo.save(x);
