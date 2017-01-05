@@ -17,6 +17,7 @@ public class User {
     private String password;
     private boolean enabled = true;
 
+    private String picture;
     private String companyName;
     private String companyAddress;
     private String phoneNumber;
@@ -113,5 +114,13 @@ public class User {
 
     public void setBankAccountNumber(String bankAccountNumber) {
         this.bankAccountNumber = bankAccountNumber;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

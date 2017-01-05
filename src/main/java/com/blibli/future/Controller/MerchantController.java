@@ -1,8 +1,10 @@
 package com.blibli.future.Controller;
 
 import com.blibli.future.Model.Merchant;
+import com.blibli.future.Model.Order;
 import com.blibli.future.Model.Product;
 import com.blibli.future.repository.MerchantRepository;
+import com.blibli.future.repository.OrderRepository;
 import com.blibli.future.repository.ProductRepository;
 import com.blibli.future.repository.UserRoleRepository;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -35,6 +37,8 @@ public class MerchantController {
     MerchantRepository merchantRepo;
     @Autowired
     UserRoleRepository userRoleRepository;
+    @Autowired
+    OrderRepository orderRepository;
 
     private Logger log = Logger.getLogger(MerchantController.class.getName());
 
@@ -43,11 +47,14 @@ public class MerchantController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean isLoginAsMerchant = auth.isAuthenticated() &&
                 !(auth instanceof AnonymousAuthenticationToken) ;
-        if (isLoginAsMerchant) {
+
             Merchant merchant = merchantRepo.findByUsername(auth.getName());
             model.addAttribute("merchant", merchant);
-        }
+
         model.addAttribute("isLoginAsMerchant", isLoginAsMerchant);
+
+        List<Order> order = orderRepository.findByMerchant(merchant);
+        model.addAttribute("order",order);
         return"merchant/merchant-home";
     }
     @RequestMapping("/register/merchant")
@@ -61,6 +68,8 @@ public class MerchantController {
     @PostMapping("/register/merchant")
     public String registerNewUser(@ModelAttribute Merchant merchant, Model model){
         merchant.createUserRoleEntry(userRoleRepository);
+        merchant.setPicture("/assets/images/av.png");
+        merchant.setCompanyName("");
         merchantRepo.save(merchant) ;
 
         //redirect halaman /home
@@ -127,7 +136,10 @@ public class MerchantController {
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
 
-        List<Product> products = productRepo.findAll();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Merchant merchant= merchantRepo.findByUsername(auth.getName());
+
+        List<Product> products = productRepo.findByMerchant(merchant);
         model.addAttribute("products",products);
         return "merchant/product";
     }

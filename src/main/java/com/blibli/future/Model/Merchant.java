@@ -16,6 +16,9 @@ public class Merchant extends User {
     @OneToMany
     private List<Product> products = new ArrayList<>();
 
+    @OneToMany
+    private List<Order> orders = new ArrayList<>();
+
     public void createUserRoleEntry(UserRoleRepository userRoleRepository)
     {
         UserRole r = new UserRole();
@@ -35,4 +38,13 @@ public class Merchant extends User {
     public void addProduct(Product product){
         this.products.add(product);
     }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
 }

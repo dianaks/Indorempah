@@ -77,12 +77,11 @@
     <div class="content">
         <div class="profile-content">
             <div class="profile-image">
-
+                <img src="{{merchant.picture}}">
             </div>
             <div class="profile-detail">
-                Company name:<br>
-                Current Income: <br>
-                Status: <br>
+                <b>Company name:</b> {{merchant.companyName}}<br>
+                <b>Status:</b> Active<br>
             </div>
         </div>
         <div class="merchant-menu">
@@ -101,13 +100,27 @@
                     <th>Status</th>
 
                 </tr>
+                {{#order}}
                 <tr>
-                    <td><a href="order/detail">192860685746</a></td>
-                    <td>Albertus Magnus</td>
-                    <td>Bengkoang, Lengkuas</td>
-                    <td>22:30, 16/02/2012</td>
-                    <td><button>Accept</button></td>
+                    <td><a href="order/detail">{{id}}</a></td>
+                    <td>{{merchant.username}}</td>
+                    <td>
+                        <ul>{{#detailOrders}}
+                            <li>{{product.name}} {{amount}} {{product.unit}}</li>
+                        {{/detailOrders}}</ul>
+                    </td>
+                    <td>{{createdDate}}</td>
+                    <td>
+                        {{#statusOngoing}}
+                        <button>Accept</button>
+                        {{/statusOngoing}}
+                        {{#statusDone}}
+                        <b>Accepted</b>
+                        {{/statusDone}}
+
+                    </td>
                 </tr>
+                {{/order}}
             </table>
         </div>
     </div>

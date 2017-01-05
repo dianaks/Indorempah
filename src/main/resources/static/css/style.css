@@ -44,8 +44,9 @@ ul{
     float: left;
     height:100px;
     width:100px;
-    padding-right:20px;
-    background-color: grey;
+}
+.profile-image img {
+    width: 100%;
 }
 .profile-detail{
     float:left;

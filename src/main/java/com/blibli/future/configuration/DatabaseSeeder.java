@@ -37,6 +37,7 @@ public class DatabaseSeeder {
         dummy.setCompanyName("PT.DummyCompany");
         dummy.setCompanyAddress("Jl.dummy no 10 DIY");
         dummy.setPhoneNumber("081234567890");
+        dummy.setPicture("/assets/images/cu1.jpg");
         customerRepo.save(dummy);
         dummy.createUserRoleEntry(userRoleRepository);
         customerRepo.save(dummy);
@@ -48,6 +49,7 @@ public class DatabaseSeeder {
         ada.setCompanyName("PT.AdaCompany");
         ada.setCompanyAddress("Jl.ada no 11 DIY");
         ada.setPhoneNumber("081234567890");
+        ada.setPicture("/assets/images/me1.jpg");
         merchantRepo.save(ada);
         ada.createUserRoleEntry(userRoleRepository);
         merchantRepo.save(ada);

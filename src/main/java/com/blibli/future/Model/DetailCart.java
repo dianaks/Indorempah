@@ -81,4 +81,15 @@ public class DetailCart {
         this.cart = cart;
         cart.addDetailCart(this);
     }
+
+    @Override
+    public String toString() {
+        return "DetailCart{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", price=" + price +
+                ", product=" + product +
+                ", cart=" + cart +
+                '}';
+    }
 }

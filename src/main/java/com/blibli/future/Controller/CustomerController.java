@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -193,28 +194,46 @@ public class CustomerController {
         }
         model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
 
-       Order order = new Order();
-       // Mengambil object cart yang ada di repositori cart
-       Cart cart = cartRepository.findByCustomer(customer);
+        Cart cart = cartRepository.findByCustomer(customer);
 
-       order.setTotalPrice(cart.getTotalPrice());
-       order.setCreatedDate(new Date());
-       order.setCustomer(customer);
-       orderRepository.save(order);
-        // Untuk setiap DC yang ada didalam Cart, dapatkan detail cart
-        for (DetailCart detailCart: cart.getDetailCarts()) {
-            DetailOrder detailOrder = new DetailOrder();
-            detailOrder.setAmount(detailCart.getAmount());
-            detailOrder.setPrice(detailCart.getPrice());
-            detailOrder.setProduct(detailCart.getProduct());
+        List<Order> orders = new ArrayList<>();
+        for (DetailCart detailCart : cart.getDetailCarts()) {
+            System.out.println(detailCart.toString());
+            Boolean found = false;
+            for (Order o: orders) {
+                System.out.println(o.toString());
+                long id_in_order = o.getMerchant().getId();
+                long id_in_detail_cart = detailCart.getProduct().getMerchant().getId();
+                if(id_in_order == id_in_detail_cart){
+                    Order order = o;
+                    DetailOrder detailOrder = new DetailOrder();
+                    detailOrder.setAmount(detailCart.getAmount());
+                    detailOrder.setPrice(detailCart.getPrice());
+                    detailOrder.setProduct(detailCart.getProduct());
+                    detailOrder.setOrder(order);
+                    detailOrderRepository.save(detailOrder);
+                    found = true;
+                }
+            }
+            if(found == false){
+                Order order = new Order();
+                order.setTotalPrice(cart.getTotalPrice());
+                order.setCreatedDate(new Date());
+                order.setCustomer(customer);
+                order.setStatus(Order.STATUS_ONGOING);
+                order.setMerchant(detailCart.getProduct().getMerchant());
+                orderRepository.saveAndFlush(order);
+                orders.add(order);
 
-            detailOrder.setOrder(order);
-            detailOrderRepository.save(detailOrder);
+                DetailOrder detailOrder = new DetailOrder();
+                detailOrder.setAmount(detailCart.getAmount());
+                detailOrder.setPrice(detailCart.getPrice());
+                detailOrder.setProduct(detailCart.getProduct());
+                detailOrder.setOrder(order);
+                detailOrderRepository.save(detailOrder);
+                orderRepository.save(order);
+            }
         }
-        orderRepository.save(order);
-        model.addAttribute("order",order);
-
-        // Delete Cart
         cartRepository.delete(cart);
 
         return "redirect:/user/order/history";

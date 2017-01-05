@@ -95,7 +95,15 @@
                         <strong>Total Price: <span class="item_price">{{totalPrice}}</span><!--OrderProductPrice--></strong>
                     </div>
                 </td>
-                <td><!--OrderStatus--></td>
+                <td>
+                    {{#statusOngoing}}
+                        <b>On Process</b>
+                    {{/statusOngoing}}
+                    {{#statusDone}}
+                        <b>Done</b>
+                    {{/statusDone}}
+
+                </td>
             </tr>
             {{/order}}<!--//OrderIteration-->
         </table>

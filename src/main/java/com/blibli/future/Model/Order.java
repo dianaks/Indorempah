@@ -11,17 +11,22 @@ import java.util.List;
 @Entity
 @Table(name="indorempah_order")
 public class Order {
+    public static final String STATUS_DONE="Done";
+    public static final String STATUS_ONGOING="Ongoing";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private Date createdDate;
     private long totalPrice;
-
+    private String status;
     @OneToMany(fetch = FetchType.EAGER)
     private List<DetailOrder> detailOrders = new ArrayList<>();
 
     @ManyToOne
     private Customer customer;
+
+    @ManyToOne
+    private Merchant merchant;
 
 
     public Order() {
@@ -68,5 +73,42 @@ public class Order {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", createdDate=" + createdDate +
+                ", totalPrice=" + totalPrice +
+                ", detailOrders=" + detailOrders +
+                ", customer=" + customer +
+                ", merchant=" + merchant +
+                '}';
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public boolean isStatusDone(){
+        return status.equals(STATUS_DONE);
+    }
+
+    public boolean isStatusOngoing(){
+        return status.equals(STATUS_ONGOING);
+    }
+
 }
 
