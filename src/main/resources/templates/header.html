@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>INDOREMPAH</title>
-</head>
-<body>
+{{#authService.loggedAsCustomer}}
+    {{>user/header}}
+{{/authService.loggedAsCustomer}}
+
+{{#authService.loggedAsMerchant}}
+    {{>merchant/header}}
+{{/authService.loggedAsMerchant}}
+
+{{^authService.loggedIn}}
 <div class="header">
-
     <div class="container">
-
         <div class="logo">
             <h1 ><a href="/"><img src="/assets/images/logo.png">INDOREMPAH<span>Indonesian Herbs and Spices</span></a></h1>
         </div>
@@ -58,8 +58,6 @@
             </div>
             <div class="clearfix"></div>
         </div>
-
     </div>
 </div>
-</body>
-</html>
+{{/authService.loggedIn}}

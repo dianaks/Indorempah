@@ -68,12 +68,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 <body>
 <!--header-->
-{{#isLoginAsCustomer}}
-	{{>user/header}}
-{{/isLoginAsCustomer}}
-{{^isLoginAsCustomer}}
 	{{>header}}
-{{/isLoginAsCustomer}}
 
 <!--//header-->
   <!---->
@@ -125,7 +120,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="single.html">{{name}}</a>({{unit}})</h6>
+											<h6><a href="/product/{{id}}">{{name}}</a>({{unit}})</h6>
 										</div>
 										<div class="mid-2">
 											<p ><em class="item_price">{{firstPrice}}</em></p>
@@ -135,7 +130,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											<div class="clearfix"></div>
 										</div>
 										<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Moong" data-summary="summary 1" data-price="1.50" data-quantity="1" data-image="images/of.png">Add to Cart</button>
+											<a href ="/product/in/{{id}}">
+										   		<button class="btn btn-danger my-cart-btn my-cart-b">Add to Cart</button>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -155,7 +152,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="single.html">{{name}}</a>({{unit}})</h6>
+											<h6><a href="/product/{{id}}">{{name}}</a>({{unit}})</h6>
 										</div>
 										<div class="mid-2">
 											<p ><em class="item_price">{{firstPrice}}</em></p>
@@ -165,7 +162,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											<div class="clearfix"></div>
 										</div>
 											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="5" data-name="Lays" data-summary="summary 5" data-price="0.70" data-quantity="1" data-image="images/of4.png">Add to Cart</button>
+											<a href ="/product/in/{{id}}">
+										   	<button class="btn btn-danger my-cart-btn my-cart-b">Add to Cart</button>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -185,7 +184,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="single.html">{{name}}</a>({{unit}})</h6>
+											<h6><a href="/product/{{id}}">{{name}}</a>({{unit}})</h6>
 										</div>
 										<div class="mid-2">
 											<p ><em class="item_price">{{firstPrice}}</em></p>
@@ -195,7 +194,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											<div class="clearfix"></div>
 										</div>
 											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="9" data-name="Banana" data-summary="summary 9" data-price="1.50" data-quantity="1" data-image="images/of8.png">Add to Cart</button>
+											<a href ="/product/in/{{id}}">
+										  	<button class="btn btn-danger my-cart-btn my-cart-b">Add to Cart</button>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -218,19 +219,19 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		
 		<div class="col-md-4 m-w3ls">
 			<div class="col-md1 ">
-				<a href="herbs.html">
+				<a href="/">
 					<img src="/assets/images/co1.jpg" class="img-responsive img" alt="">
 					<div class="big-sa">
 						<h6>New Collections</h6>
 						<h3>Season<span>ing </span></h3>
-						<p>There are many variations of passages of Lorem Ipsum available, but the majority </p>
+						<p>Give you the taste you want</p>
 					</div>
 				</a>
 			</div>
 		</div>
 		<div class="col-md-4 m-w3ls1">
 			<div class="col-md ">
-				<a href="hold.html">
+				<a href="/">
 					<img src="/assets/images/co.jpg" class="img-responsive img" alt="">
 					<div class="big-sale">
 						<div class="big-sale1">
@@ -243,20 +244,20 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		</div>
 		<div class="col-md-4 m-w3ls">
 			<div class="col-md2 ">
-				<a href="herbs.html">
+				<a href="/spices">
 					<img src="/assets/images/co2.jpg" class="img-responsive img1" alt="">
 					<div class="big-sale2">
 						<h3>Spi<span>ces</span></h3>
-						<p>It is a long established fact that a reader </p>		
+						<p>Seeds, berries, bark, roots and fruits.</p>
 					</div>
 				</a>
 			</div>
 			<div class="col-md3 ">
-				<a href="hold.html">
+				<a href="/herbs">
 					<img src="/assets/images/co3.jpg" class="img-responsive img1" alt="">
 					<div class="big-sale3">
-						<h3>Vegeta<span>bles</span></h3>
-						<p>It is a long established fact that a reader </p>
+						<h3>He<span>rbs</span></h3>
+						<p>Leafy green or flowering parts of a plant.</p>
 					</div>
 				</a>
 			</div>

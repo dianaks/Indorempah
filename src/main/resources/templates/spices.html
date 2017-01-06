@@ -69,12 +69,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 <body>
 <!--header-->
-{{#isLoginAsCustomer}}
-{{>user/header}}
-{{/isLoginAsCustomer}}
-{{^isLoginAsCustomer}}
 {{>header}}
-{{/isLoginAsCustomer}}
 <!-- //header-->
 
     <!-- Carousel
@@ -123,7 +118,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									</a>
 									<div class="mid-1">
 										<div class="women">
-											<h6><a href="single.html">{{name}}</a>({{unit}})</h6>
+											<h6><a href="/product/{{id}}">{{name}}</a>({{unit}})</h6>
 										</div>
 										<div class="mid-2">
 											<p ><em class="item_price">{{firstPrice}}</em></p>
@@ -132,8 +127,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											</div>
 											<div class="clearfix"></div>
 										</div>
-											<div class="add">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="36" data-name="Baby Oil" data-summary="summary 36" data-price="6.00" data-quantity="1" data-image="images/of36.png">Add to Cart</button>
+										<div class="add">
+											<a href ="/product/in/{{id}}" class="btn btn-danger my-cart-btn my-cart-b">
+												Add to Cart
+											</a>
 										</div>
 									</div>
 								</div>
