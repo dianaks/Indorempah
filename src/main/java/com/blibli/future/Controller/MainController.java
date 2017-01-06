@@ -5,6 +5,7 @@ import com.blibli.future.Model.Merchant;
 import com.blibli.future.Model.Product;
 import com.blibli.future.Model.User;
 import com.blibli.future.repository.*;
+import com.blibli.future.service.AuthenticationService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,8 +39,20 @@ public class MainController {
     private CartRepository cartRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AuthenticationService authenticationService;
 
     private Logger log = Logger.getLogger(MainController.class.getName());
+
+    @ModelAttribute("authService")
+    public AuthenticationService authService() {
+        return authenticationService;
+    }
+
+    @ModelAttribute("activeUser")
+    public User getActiveUser() {
+        return authenticationService.getAuthenticatedUser();
+    }
 
     @RequestMapping("/")
     public String home (Model model) {

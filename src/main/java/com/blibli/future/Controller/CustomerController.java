@@ -2,7 +2,9 @@ package com.blibli.future.Controller;
 
 import com.blibli.future.Model.*;
 import com.blibli.future.repository.*;
+import com.blibli.future.service.AuthenticationService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -40,6 +42,20 @@ public class CustomerController {
     DetailOrderRepository detailOrderRepository;
     @Autowired
     private DetailCartRepository detailCartRepository;
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    private Logger log = Logger.getLogger(MainController.class.getName());
+
+    @ModelAttribute("authService")
+    public AuthenticationService authService() {
+        return authenticationService;
+    }
+
+    @ModelAttribute("activeUser")
+    public User getActiveUser() {
+        return authenticationService.getAuthenticatedUser();
+    }
 
 //    @Autowired
 //    ProductRepository productRepo;

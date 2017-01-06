@@ -3,10 +3,12 @@ package com.blibli.future.Controller;
 import com.blibli.future.Model.Merchant;
 import com.blibli.future.Model.Order;
 import com.blibli.future.Model.Product;
+import com.blibli.future.Model.User;
 import com.blibli.future.repository.MerchantRepository;
 import com.blibli.future.repository.OrderRepository;
 import com.blibli.future.repository.ProductRepository;
 import com.blibli.future.repository.UserRoleRepository;
+import com.blibli.future.service.AuthenticationService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +41,20 @@ public class MerchantController {
     UserRoleRepository userRoleRepository;
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    private AuthenticationService authenticationService;
 
-    private Logger log = Logger.getLogger(MerchantController.class.getName());
+    private Logger log = Logger.getLogger(MainController.class.getName());
+
+    @ModelAttribute("authService")
+    public AuthenticationService authService() {
+        return authenticationService;
+    }
+
+    @ModelAttribute("activeUser")
+    public User getActiveUser() {
+        return authenticationService.getAuthenticatedUser();
+    }
 
     @RequestMapping("merchant")
     public String dashboard(HttpServletRequest request, Model model){
