@@ -43,7 +43,10 @@ public class MerchantController {
     private Logger log = Logger.getLogger(MerchantController.class.getName());
 
     @RequestMapping("merchant")
-    public String dashboard(Model model){
+    public String dashboard(HttpServletRequest request, Model model){
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         boolean isLoginAsMerchant = auth.isAuthenticated() &&
                 !(auth instanceof AnonymousAuthenticationToken) ;
@@ -56,6 +59,18 @@ public class MerchantController {
         List<Order> order = orderRepository.findByMerchant(merchant);
         model.addAttribute("order",order);
         return"merchant/merchant-home";
+    }
+    @RequestMapping("merchant/order/{id}/accept")
+    public  String accept(HttpServletRequest request, Model model, @PathVariable String id){
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        Order acceptedOrder = orderRepository.findOne(Long.parseLong(id));
+        acceptedOrder.setStatus(Order.STATUS_DONE);
+        orderRepository.save(acceptedOrder);
+        model.addAttribute("order", acceptedOrder);
+
+        return "redirect:/merchant";
     }
     @RequestMapping("/register/merchant")
     public String register (HttpServletRequest request, Model model) {

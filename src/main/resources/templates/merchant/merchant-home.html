@@ -112,7 +112,10 @@
                     <td>{{createdDate}}</td>
                     <td>
                         {{#statusOngoing}}
-                        <button>Accept</button>
+                        <form action="/merchant/order/{{id}}/accept" method="post" class="form-w3agile">
+                            <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                            <input type="submit" class="accept" value="Accept">
+                        </form>
                         {{/statusOngoing}}
                         {{#statusDone}}
                         <b>Accepted</b>
