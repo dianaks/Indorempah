@@ -106,13 +106,27 @@ public class MerchantController {
         return "redirect:/merchant";
     }
 
-    @RequestMapping("merchant/profile/edit")
-    public String merchantEditProfile(Model model){
-        return"merchant/edit-profile";
+//    @RequestMapping("merchant/profile/edit")
+//    public String merchantEditProfile(Model model){
+//        return"merchant/edit-profile";
+//    }
+    @RequestMapping("/merchant/profile/edit")
+    public String merchantEditProfile(HttpServletRequest request, Model model) {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        Merchant editableProfileMerchant = (Merchant) authService().getAuthenticatedUser();
+        model.addAttribute("merchant", editableProfileMerchant);
+
+        return "merchant/edit-profile";
     }
 
+
+//space for saving edited profile
+    //semangaat
+
     @RequestMapping("merchant/product/upload")
-    public String greeting8(HttpServletRequest request,Model model){
+    public String greeting81(HttpServletRequest request,Model model){
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
         return "merchant/upload"; }

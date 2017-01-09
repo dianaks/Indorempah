@@ -284,18 +284,36 @@ public class CustomerController {
         return "/user/profile";
     }
 
+//    @RequestMapping("/user/profile/edit")
+//    public String userEditProfile (Model model){
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+//                !(auth instanceof AnonymousAuthenticationToken) ;
+//        if (isLoginAsCustomer) {
+//            Customer customer = customerRepository.findByUsername(auth.getName());
+//            model.addAttribute("customer", customer);
+//        }
+//        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
+//        return "/user/edit-profile";
+//    }
+
+
     @RequestMapping("/user/profile/edit")
-    public String userEditProfile (Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        boolean isLoginAsCustomer = auth.isAuthenticated() &&
-                !(auth instanceof AnonymousAuthenticationToken) ;
-        if (isLoginAsCustomer) {
-            Customer customer = customerRepository.findByUsername(auth.getName());
-            model.addAttribute("customer", customer);
-        }
-        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
-        return "/user/edit-profile";
+    public String editProfile(HttpServletRequest request, Model model) {
+        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+        model.addAttribute("_csrf", _csrf);
+
+        Customer editableProfile = (Customer)authService().getAuthenticatedUser();
+        model.addAttribute("customer", editableProfile);
+
+        return "user/edit-profile";
     }
+
+
+
+//space for saving edited profile
+    //semangaat
+
 
     @RequestMapping("/checkout")
     public String checkout (Model model){

@@ -38,6 +38,12 @@ public class DatabaseSeeder {
         dummy.setCompanyAddress("Jl.dummy no 10 DIY");
         dummy.setPhoneNumber("081234567890");
         dummy.setPicture("/assets/images/cu1.jpg");
+
+
+
+
+
+
         customerRepo.save(dummy);
         dummy.createUserRoleEntry(userRoleRepository);
         customerRepo.save(dummy);

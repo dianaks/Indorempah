@@ -68,46 +68,52 @@
         <div class="clearfix"> </div>
     </div>
 </div>
-    <div class="edit-profile">
-        <div class="main-agileits">
-            <div class="form-w3agile">
-                <h3>Edit Profile</h3>
+<div class="edit-profile">
+    <div class="main-agileits">
+        <div class="form-w3agile">
+            <h3>Edit Profile</h3>
 
-                <form action="save" method="post" modelAttribute="Product" enctype="multipart/form-data">
-                    <h4>Profile Image</h4>
-                    <div class="image-thumbnail">
-                        <img src="" class="profile-picture">
-                    </div>
-                    <div class="key noborder">
-                        <input type="file" name="imagefile" accept="image/*">
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4>Company Description</h4>
-                    <div class="key">
-                        <input  type="text" value="" name="description" required="">
-                        <!--name harus sama dengan nama atribut class-->
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4>Company Phone</h4>
-                    <div class="key">
-                        <input  type="text" value="" name="name" required="">
-                        <div class="clearfix"></div>
-                    </div>
-                    <h4>Company Address</h4>
-                    <div class="key">
-                        <input  type="text" value="" name="Address" required="">
-                        <!--name harus sama dengan nama atribut class-->
-                        <div class="clearfix"></div>
-                    </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <input class="button" type="submit" value="Save">
-                    <a href="" class="button"> Cancel</a>
+            <form action="save" method="post" modelAttribute="Merchant" enctype="multipart/form-data">
+                <h4>Profile Image</h4>
+                <div class="image-thumbnail">
+                    <img src="{{merchant.picture}}" class="profile-picture">
+                    <input type="file" name="imagefile" accept="image/*">
+                    <div class="clearfix"></div>
+                </div>
 
-                </form>
-            </div>
+                <h4>Username</h4>
+                <div class="key">
+                    <input  type="text" value="{{merchant.username}}" name="description" required="">
+                    <!--name harus sama dengan nama atribut class-->
+                    <div class="clearfix"></div>
+                </div>
+                <h4>Company Name</h4>
+                <div class="key">
+                    <input  type="text" value="{{merchant.username}}" name="name" required="">
+                    <div class="clearfix"></div>
+                </div>
+                <h4>Company Address</h4>
+                <div class="key">
+                    <input  type="text" value="{{merchant.companyAddress}}" name="Address" required="">
+                    <!--name harus sama dengan nama atribut class-->
+                    <div class="clearfix"></div>
+                </div>
+
+                <h4>Company Phone</h4>
+                <div class="key">
+                    <input  type="text" value="{{merchant.phoneNumber}}" name="name" required="">
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
         </div>
+        <input type="submit" value="Save">
+        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+        <a href="" class="button"> Cancel</a>
+
+        </form>
     </div>
+</div>
+</div>
 
 </body>
 </html>
