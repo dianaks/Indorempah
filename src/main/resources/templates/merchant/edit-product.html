@@ -75,7 +75,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="main-agileits">
         <div class="form-w3agile">
             <h3>Edit Product</h3>
-            <form action="save" method="post" modelAttribute="Product" enctype="multipart/form-data">
+            <form action="/merchant/product/{{id}}/edit" method="post" modelAttribute="editableProduct" enctype="multipart/form-data">
                 <h4>Product Name</h4>
                 <div class="key">
                     <input  type="text" value="{{product.name}}" name="name" required="">
@@ -83,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
                 <h4>Product Image</h4>
                 <div class="image-thumbnail">
-                    <img src="{{product.picture}}" class="image-thumbnail">
+                    <img src="{{product.picture}}" class="img-thumbnail">
                 </div>
                 <div class="key noborder">
                     <input type="file" name="imagefile" accept="image/*">
@@ -114,13 +114,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="exkey">
                     <div class="form-to-left">
                         <h5>Price</h5>
-                        <input  class="form-amount" type="text" value="{{product.price}}" name="first-max-amount" required="">
-                        <input  class="form-amount"type="text" value="{{product.price}}" name="second-max-amount" required="">
+                        <input  class="form-amount" type="text" value="{{product.firstMinQuantity}}" name="firstMinQuantity" required="">
+                        <input  class="form-amount"type="text" value="{{product.secondMinQuantity}}" name="secondMinQuantity" required="">
                     </div>
                     <div class="form-to-right">
-                        <h5>Maximum Amount</h5>
-                        <input class="form-price" type="text" value="{{product.amount}}" name="first-price" required="">
-                        <input class="form-price" type="text" value="{{product.amount}}" name="second-price" required="">
+                        <h5>Minimum Amount</h5>
+                        <input class="form-price" type="text" value="{{product.firstPrice}}" name="firstPrice" required="">
+                        <input class="form-price" type="text" value="{{product.secondPrice}}" name="secondPrice" required="">
                     </div>
                     <h5>Product Unit</h5>
                     <div>
@@ -139,7 +139,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <input type="submit" value="Save">
+                <input class="button" type="submit" value="Save">
+                <input type="hidden" name="_csrf" value="{{_csrf}}"/>
                 <a href="/merchant/product" class="button"> Cancel</a>
 
             </form>

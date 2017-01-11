@@ -38,11 +38,7 @@ public class DatabaseSeeder {
         dummy.setCompanyAddress("Jl.dummy no 10 DIY");
         dummy.setPhoneNumber("081234567890");
         dummy.setPicture("/assets/images/cu1.jpg");
-
-
-
-
-
+        dummy.setBankAccountNumber("090009979900");
 
         customerRepo.save(dummy);
         dummy.createUserRoleEntry(userRoleRepository);
@@ -56,6 +52,7 @@ public class DatabaseSeeder {
         ada.setCompanyAddress("Jl.ada no 11 DIY");
         ada.setPhoneNumber("081234567890");
         ada.setPicture("/assets/images/me1.jpg");
+        ada.setBankAccountNumber("898800088990");
         merchantRepo.save(ada);
         ada.createUserRoleEntry(userRoleRepository);
         merchantRepo.save(ada);
@@ -70,7 +67,7 @@ public class DatabaseSeeder {
         o.setSecondPrice(68000);
         o.setFirstMinQuantity(1);
         o.setSecondMinQuantity(10);
-        o.setStatus("Available");
+//        o.setStatus("Available");
         o.setPicture("http://www.sekedarinfo.com/wp-content/uploads/2015/09/Manfaat-Lengkuas-atau-Laos-Untuk-pengobatan.jpg");
         o.setAmount("10");
         o.setMerchant(ada);
@@ -87,7 +84,7 @@ public class DatabaseSeeder {
         p.setSecondPrice(52000);
         p.setFirstMinQuantity(1);
         p.setSecondMinQuantity(10);
-        p.setStatus("Available");
+//        p.setStatus("Available");
         p.setPicture("http://puriegarden.com/wp-content/uploads/2013/12/cabe-rawit.jpg");
         p.setAmount("10");
         p.setMerchant(ada);
@@ -103,7 +100,7 @@ public class DatabaseSeeder {
         q.setSecondPrice(98000);
         q.setFirstMinQuantity(1);
         q.setSecondMinQuantity(10);
-        q.setStatus("Available");
+//        q.setStatus("Available");
         q.setPicture("http://palasari.co.id/wp-content/uploads/2015/01/buah-pala.jpg");
         q.setAmount("10");
         q.setMerchant(ada);
@@ -119,7 +116,7 @@ public class DatabaseSeeder {
         r.setSecondPrice(1200);
         r.setFirstMinQuantity(1);
         r.setSecondMinQuantity(10);
-        r.setStatus("Available");
+//        r.setStatus("Available");
         r.setPicture("https://muslimahzone.com/assets/2012/12/Turmeric.gif");
         r.setAmount("10");
         r.setMerchant(ada);
@@ -135,7 +132,7 @@ public class DatabaseSeeder {
         s.setSecondPrice(1800);
         s.setFirstMinQuantity(1);
         s.setSecondMinQuantity(10);
-        s.setStatus("Available");
+//        s.setStatus("Available");
         s.setPicture("http://www.tokomesin.com/wp-content/uploads/2015/04/lidah-buaya-tokomesin.jpg?x52897");
         s.setAmount("10");
         s.setMerchant(ada);
@@ -151,7 +148,7 @@ public class DatabaseSeeder {
         t.setSecondPrice(23000);
         t.setFirstMinQuantity(1);
         t.setSecondMinQuantity(10);
-        t.setStatus("Available");
+//        t.setStatus("Available");
         t.setPicture("http://halosehat.com/wp-content/uploads/2015/10/daun-kemangi.jpg");
         t.setAmount("10");
         t.setMerchant(ada);
@@ -167,7 +164,7 @@ public class DatabaseSeeder {
         u.setSecondPrice(68000);
         u.setFirstMinQuantity(1);
         u.setSecondMinQuantity(10);
-        u.setStatus("Available");
+//        u.setStatus("Available");
         u.setPicture("http://www.anneahira.com/images/cabe-merah-keriting.jpg");
         u.setAmount("10");
         u.setMerchant(ada);
@@ -185,7 +182,7 @@ public class DatabaseSeeder {
         v.setSecondPrice(169000);
         v.setFirstMinQuantity(1);
         v.setSecondMinQuantity(10);
-        v.setStatus("Available");
+//        v.setStatus("Available");
         v.setPicture("https://s4.bukalapak.com/img/900868492/medium/213032_d6caed99_5385_42bc_9dba_748a00de935e.jpg");
         v.setAmount("10");
         v.setMerchant(ada);
@@ -200,7 +197,7 @@ public class DatabaseSeeder {
         w.setSecondPrice(18000);
         w.setFirstMinQuantity(1);
         w.setSecondMinQuantity(10);
-        w.setStatus("Available");
+//        w.setStatus("Available");
         w.setPicture("http://obatherbalibuhamil.com/wp-content/uploads/2015/07/Manfaat-Dan-Khasiat-Jahe-Bagi-Kesehatan-Ibu-Hamil1.jpg");
         w.setAmount("10");
         w.setMerchant(ada);
@@ -216,7 +213,7 @@ public class DatabaseSeeder {
         x.setSecondPrice(28000);
         x.setFirstMinQuantity(1);
         x.setSecondMinQuantity(10);
-        x.setStatus("Available");
+//        x.setStatus("Available");
         x.setPicture("http://3.bp.blogspot.com/-4lx2fg_XF9s/VeGOX-FVFxI/AAAAAAAAFuI/Mc84mjKuVI0/s1600/daun%2Bmint.png");
         x.setAmount("10");
         x.setMerchant(ada);
@@ -233,7 +230,7 @@ public class DatabaseSeeder {
         y.setSecondPrice(94000);
         y.setFirstMinQuantity(1);
         y.setSecondMinQuantity(10);
-        y.setStatus("Available");
+//        y.setStatus("Available");
         y.setPicture("http://images.solopos.com/2015/05/Lada-hitam.jpg");
         y.setAmount("10");
         y.setMerchant(ada);
@@ -249,7 +246,7 @@ public class DatabaseSeeder {
         z.setSecondPrice(22000);
         z.setFirstMinQuantity(1);
         z.setSecondMinQuantity(10);
-        z.setStatus("Available");
+//        z.setStatus("Available");
         z.setPicture("http://supermetroemall.com/image/cache/data/Bumbu/Kayu_manis_batan_512850cd73853-500x500.jpg");
         z.setAmount("10");
         z.setMerchant(ada);

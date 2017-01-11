@@ -13,10 +13,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -45,7 +42,7 @@ public class CustomerController {
     @Autowired
     private AuthenticationService authenticationService;
 
-    private Logger log = Logger.getLogger(MainController.class.getName());
+       private Logger log = Logger.getLogger(MainController.class.getName());
 
     @ModelAttribute("authService")
     public AuthenticationService authService() {
@@ -283,36 +280,104 @@ public class CustomerController {
         model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
         return "/user/profile";
     }
-
+//
+////    @RequestMapping("/user/profile/edit")
+////    public String userEditProfile (Model model){
+////        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+////        boolean isLoginAsCustomer = auth.isAuthenticated() &&
+////                !(auth instanceof AnonymousAuthenticationToken) ;
+////        if (isLoginAsCustomer) {
+////            Customer customer = customerRepository.findByUsername(auth.getName());
+////            model.addAttribute("customer", customer);
+////        }
+////        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
+////        return "/user/edit-profile";
+////    }
+//
+//
+//
+//    @PostMapping("/register")
+////    public String registerNewUser(@ModelAttribute Customer customer, Model model){
+////        customer.createUserRoleEntry(userRoleRepository);
+////        customerRepository.save(customer) ;
+////
+////
+////        model.addAttribute("newUser", customer);
+////        return "redirect:/";
+////    }
+//
 //    @RequestMapping("/user/profile/edit")
-//    public String userEditProfile (Model model){
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        boolean isLoginAsCustomer = auth.isAuthenticated() &&
-//                !(auth instanceof AnonymousAuthenticationToken) ;
-//        if (isLoginAsCustomer) {
-//            Customer customer = customerRepository.findByUsername(auth.getName());
-//            model.addAttribute("customer", customer);
-//        }
-//        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
-//        return "/user/edit-profile";
+//    public String editProfile(@ModelAttribute Customer customer, HttpServletRequest request, Model model) {
+//        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+//        model.addAttribute("_csrf", _csrf);
+//
+//        Customer editableProfile = (Customer)authService().getAuthenticatedUser();
+//        model.addAttribute("customer", editableProfile);
+//
+//        return "user/edit-profile";
+//    }
+//
+//    @PostMapping("/user/profile/editedSave")
+////    public String saveEditedProfile(
+////            HttpServletRequest request)
+////    {
+////        Customer editableProfile = (Customer) authService().getAuthenticatedUser();
+////        model.addAttribute("_csrf", _csrf);
+////        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+////        model.addAttribute("_csrf", _csrf);
+//
+//    public String saveEditedProfile(HttpServletRequest request, Model model) {
+//        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
+//        model.addAttribute("_csrf", _csrf);
+//
+//        Customer editableProfile = (Customer)authService().getAuthenticatedUser();
+//        model.addAttribute("customer", editableProfile  );
+//
+//        editableProfile.setUsername(request.getParameter("username"));
+//        editableProfile.setEmail(request.getParameter("email"));
+//        editableProfile.setCompanyName(request.getParameter("companyName"));
+//        editableProfile.setCompanyAddress(request.getParameter("companyAddress"));
+//        editableProfile.setPhoneNumber(request.getParameter("phoneNumber"));
+//
+//        customerRepository.save(editableProfile);
+//        return "redirect:/user/profile";
 //    }
 
 
-    @RequestMapping("/user/profile/edit")
-    public String editProfile(HttpServletRequest request, Model model) {
+
+
+
+
+
+
+    @RequestMapping(value="/user/profile/edit", method= RequestMethod.GET)
+    public String editCustomerForm(
+            HttpServletRequest request,
+            Model model)
+    {
+        Customer customer = (Customer) authenticationService.getAuthenticatedUser();
+        model.addAttribute("customer", customer);
         String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
         model.addAttribute("_csrf", _csrf);
-
-        Customer editableProfile = (Customer)authService().getAuthenticatedUser();
-        model.addAttribute("customer", editableProfile);
-
         return "user/edit-profile";
     }
 
+    @RequestMapping(value="/user/profile/edit", method= RequestMethod.POST)
+    public String editCustomer(
+            HttpServletRequest request)
+    {
+        Customer customer = (Customer) authenticationService.getAuthenticatedUser();
 
+        customer.setPassword(request.getParameter("password"));
+        customer.setEmail(request.getParameter("email"));
+        customer.setCompanyName(request.getParameter("companyName"));
+        customer.setCompanyAddress(request.getParameter("companyAddress"));
+        customer.setPhoneNumber(request.getParameter("phoneNumber"));
+        customer.setBankAccountNumber(request.getParameter("bankAccountNumber"));
+        customerRepository.save(customer);
+        return "redirect:/user/profile";
+    }
 
-//space for saving edited profile
-    //semangaat
 
 
     @RequestMapping("/checkout")

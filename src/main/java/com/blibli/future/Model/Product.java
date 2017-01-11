@@ -23,7 +23,7 @@ public class Product {
     private Integer secondMinQuantity;
     private String category;
     private String description;
-    private String status = "Available";
+//    private String status = "Available";
     private String picture;
     @ManyToOne
     private Merchant merchant;
@@ -77,13 +77,13 @@ public class Product {
         this.description = description;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
 
     public String getPicture() {
         return picture;

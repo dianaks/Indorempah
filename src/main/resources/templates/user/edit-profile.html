@@ -73,46 +73,54 @@
             <div class="form-w3agile">
                 <h3>Edit Profile</h3>
 
-                <form action="save" method="post" modelAttribute="Customer" enctype="multipart/form-data">
-                    <h4>Profile Image</h4>
-                    <div class="image-thumbnail">
-                        <img src="{{customer.picture}}" class="profile-picture">
-                        <input type="file" name="imagefile" accept="image/*">
-                        <div class="clearfix"></div>
-                    </div>
+                <form action="/user/profile/edit" method="post" modelAttribute="customer" enctype="multipart/form-data">
+
+                    <!--<h4>Profile Image</h4>-->
+                    <!--<div class="image-thumbnail">-->
+                        <!--<img src="{{customer.picture}}" class="profile-picture">-->
+                        <!--<input type="file" name="imagefile" accept="image/*">-->
+                        <!--<div class="clearfix"></div>-->
+                    <!--</div>-->
                     <!--<div class="key noborder">-->
                         <!---->
-                        <!---->
-                        <!---->
+
                     <!--</div>-->
 
 
-                    <h4>Username</h4>
+                    <h4>Email</h4>
                     <div class="key">
-                        <input  type="text" value="{{customer.username}}" name="description" required="">
+                        <input  type="text" value="{{customer.email}}" name="email" required="">
                         <!--name harus sama dengan nama atribut class-->
                         <div class="clearfix"></div>
                     </div>
                     <h4>Company Name</h4>
                     <div class="key">
-                        <input  type="text" value="{{customer.username}}" name="name" required="">
+                        <input  type="text" value="{{customer.companyName}}" name="companyName" required="">
                         <div class="clearfix"></div>
                     </div>
                     <h4>Company Address</h4>
                     <div class="key">
-                        <input  type="text" value="{{customer.companyAddress}}" name="Address" required="">
+                        <input  type="text" value="{{customer.companyAddress}}" name="companyAddress" required="">
                         <!--name harus sama dengan nama atribut class-->
                         <div class="clearfix"></div>
                     </div>
 
                     <h4>Company Phone</h4>
                     <div class="key">
-                        <input  type="text" value="{{customer.phoneNumber}}" name="name" required="">
+                        <input  type="text" value="{{customer.phoneNumber}}" name="phoneNumber" required="">
                         <div class="clearfix"></div>
                     </div>
+
+                    <h4>Company Bank Account Number</h4>
+                    <div class="key">
+                        <input  type="text" value="{{customer.bankAccountNumber}}" name="bankAccountNumber" required="">
+                        <div class="clearfix"></div>
+                    </div>
+
                         <div class="clearfix"></div>
                     </div>
                     <input class="button" type="submit" value="Save">
+                    <input type="hidden" name="_csrf" value="{{_csrf}}"/>
                     <a href="" class="button"> Cancel</a>
 
                 </form>

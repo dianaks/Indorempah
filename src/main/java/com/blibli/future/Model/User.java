@@ -13,6 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String username;
+    //ini
     private String email;
     private String password;
     private boolean enabled = true;
