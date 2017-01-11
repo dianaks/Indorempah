@@ -36,6 +36,9 @@ ul{
 .order-history{
     margin: 50px 100px;
 }
+.single-order-box{
+    padding-bottom: 30px;
+}
 .profile-content{
     width:100%;
     height:100px;
@@ -71,6 +74,9 @@ table.user-profile-table{
     width:388px;
 }
 
+table.user-profile-table td{
+    border:none;
+}
 table.merchant-order-table,
 table.cart-table,
 table.checkout-table,
@@ -3287,8 +3293,7 @@ h1.t-button {
 .profile-picture{
     height:100px;
     width:100px;
-    border: 1px black solid;
-    margin-top: 20px;
+    margin-top: -30px;
 }
 /*cart*/
 .padding-30px{
@@ -3309,7 +3314,6 @@ h1.t-button {
 }
 .to-the-right-side{
     text-align: right;
-    float: right;
 }
 /*product-detail*/
 .margin-50px{

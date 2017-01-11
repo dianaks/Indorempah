@@ -71,44 +71,37 @@
     </div>
     <!---contain---->
     <div class="order-history">
-        <table class="order-history-table">
-            <tr>
-                <th>Date</th>
-                <th>Id Order</th>
-                <th>Product & Price</th>
-                <th>Status</th>
-            </tr>
-            {{#order}}<!--OrderIteration-->
-            <tr>
-                <td>{{createdDate}}<!--OrderDate--></td>
-                <td>{{id}}<!--OrderId--></td>
-                <td>
-                    {{#detailOrders}}<!--OrderDetailIteration-->
-                    <div class="history-order-details">
-                        <img src="{{product.picture}}" class="img-thumbnail"><br>
-                        <strong>{{product.name}}<!--OrderProductDetailName--></strong><br>
-                        Quantity: {{amount}} {{product.unit}}<!--OrderProductDetailQuantity--><br>
-                        Price: <span class="item_price">{{product.firstPrice}}</span><!--OrderProductDetailPrice--><br>
-                    </div>
-                    {{/detailOrders}}<!--//OrderDetailIteration-->
-                    <div>
-                        <strong>Total Price: <span class="item_price">{{totalPrice}}</span><!--OrderProductPrice--></strong>
-                    </div>
-                </td>
-                <td>
-                    {{#statusOngoing}}
-                        <b>On Process</b>
-                    {{/statusOngoing}}
-                    {{#statusDone}}
-                        <b>Done</b>
-                    {{/statusDone}}
-
-                </td>
-            </tr>
-            {{/order}}<!--//OrderIteration-->
-        </table>
+        {{#order}}
+        <div class="single-order-box">
+            <h4>Id Order: {{id}}</h4><br>
+            Date: <strong>{{createdDate}}</strong><br>
+            Total Price: <strong><span class="item_price">{{totalPrice}}</span></strong><br>
+            Status:<strong>
+                {{#statusOngoing}}
+                <b>On Process</b>
+                {{/statusOngoing}}
+                {{#statusDone}}
+                <b>Done</b>
+                {{/statusDone}}</strong>
+            <table class="order-history-table">
+                <tr>
+                    <th>Product</th>
+                    <th>Detail Information</th>
+                </tr>
+                <tr>
+                    {{#detailOrders}}
+                        <tr>
+                            <td><img src="{{product.picture}}" class="img-thumbnail" style="height: 50px; width: 50px;"><br></td>
+                            <td><strong>{{product.name}}</strong><br>
+                                Quantity: {{amount}} {{product.unit}}<br>
+                                Price: <span class="item_price">{{product.firstPrice}}</span><br></td>
+                        </tr>
+                    {{/detailOrders}}
+                </tr>
+            </table>
+        </div>
+        {{/order}}
     </div>
-    <!--//contain--->
     <!---footer---->
     {{>footer}}
     <!---//footer---->

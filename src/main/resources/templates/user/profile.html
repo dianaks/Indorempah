@@ -76,36 +76,42 @@
     <div class="login">
         <div class="main-agileits">
             <div class="form-w3agile form1">
-                <h3>Profile</h3>
-                    <div class="user-profile-picture">
-                        <img class="profile-picture" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Blank_square.svg/2000px-Blank_square.svg.png">
-                    </div>
+                <h3>Company Profile</h3>
+                <div class="user-profile-picture">
+                    <img class="profile-picture" src="{{customer.picture}}">
+                </div>
                 <table class="user-profile-table">
                     <tr>
                         <td>Email</td>
-                        <td>{{customer.email}}<!--Password--></td>
+                        <td>:</td>
+                        <td>{{customer.email}}</td>
                     </tr>
                     <tr>
-                        <td>Company Name</td>
-                        <td>{{customer.companyName}}<!--Company Name--></td>
+                        <td>Name</td>
+                        <td>:</td>
+                        <td>{{customer.companyName}}</td>
                     </tr>
 
                     <tr>
-                        <td>Company Address</td>
-                        <td>{{customer.companyAddress}}<!--CompanyAddress--></td>
+                        <td>Address</td>
+                        <td>:</td>
+                        <td>{{customer.companyAddress}}</td>
                     </tr>
                     <tr>
-                        <td>Company Phone</td>
-                        <td>{{customer.phoneNumber}}<!--CompanyPhone--></td>
+                        <td>Phone</td>
+                        <td>:</td>
+                        <td>{{customer.phoneNumber}}</td>
                     </tr>
                     <tr>
-                        <td>Bank Account Nummber</td>
-                        <td>{{customer.bankAccountNumber}}<!--CompanyPhone--></td>
+                        <td>Bank Account</td>
+                        <td>:</td>
+                        <td>{{customer.bankAccountNumber}}</td>
                     </tr>
                 </table>
                 <div class="to-the-right-side">
                     <a href="/user/profile/edit" class="button">Edit</a>
                 </div>
+            </div>
         </div>
     </div>
     <!--footer-->
