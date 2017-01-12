@@ -3421,3 +3421,35 @@ a.button {
 .prev {
     height: 1000px !important;
 }
+
+.my-sidebar{
+    padding:0px;
+    background: #fde5ae;
+}
+.my-sidebar .main{
+    background: white;
+}
+.my-sidebar div.content{
+    margin-top: 50px;
+    margin-left: 32px;
+}
+.my-sidebar li{
+    width: 100%;
+}
+.my-sidebar li a{
+    color: #000000;
+}
+
+.my-sidebar li a.active{
+    color: #FFFFFF;
+    background:green;
+}
+
+.my-sidebar li:hover{
+    background: #fdf1e1;
+}
+
+.my-sidebar .sidebar{
+    padding-top: 40px;
+    padding-right: 0px;
+}

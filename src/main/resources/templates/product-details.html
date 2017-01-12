@@ -16,11 +16,13 @@
     <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
     <!-- js -->
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/currencyFormatter.min.js"></script>
     <!-- //js -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="/assets/js/move-top.js"></script>
     <script type="text/javascript" src="/assets/js/easing.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() { OSREC.CurrencyFormatter.formatAll( { selector: '.item_price', currency: 'IDR' }); });
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
                 event.preventDefault();
@@ -57,8 +59,6 @@
         });
     </script>
     <!---//End-rate---->
-
-
 </head>
 <body>
 <!--header-->
@@ -81,9 +81,9 @@
                     </div>
                     <div class="col-md-7 span-1 ">
                         <h3> {{product.name}} </h3>
-                        <p class="in-para"> {{product.secondPrice}}/{{product.unit}} untuk pembelian lebih dari {{product.secondMinQuantity}} unit</p>
+                        <p class="in-para"> <span class ="item_price">{{product.secondPrice}}</span>/{{product.unit}} untuk pembelian lebih dari {{product.secondMinQuantity}} unit</p>
                         <div class="price_single">
-                            <span class="reducedfrom ">{{product.firstPrice}}/{{product.unit}}</span>
+                            <span class="reducedfrom "><span class ="item_price">{{product.firstPrice}}</span>/{{product.unit}}</span>
 
                             <div class="clearfix"></div>
                         </div>

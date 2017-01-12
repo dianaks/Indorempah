@@ -15,11 +15,13 @@
     <link href="/assets/css/style.css" rel='stylesheet' type='text/css' />
     <!-- js -->
     <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/js/currencyFormatter.min.js"></script>
     <!-- //js -->
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="/assets/js/move-top.js"></script>
     <script type="text/javascript" src="/assets/js/easing.js"></script>
     <script type="text/javascript">
+        $(document).ready(function() { OSREC.CurrencyFormatter.formatAll( { selector: '.item_price', currency: 'IDR' }); });
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
                 event.preventDefault();
@@ -63,63 +65,73 @@
 <!--//header-->
     <div class="banner-top">
         <div class="container">
-            <h3>Wellcome</h3>
+            <h3>Welcome</h3>
             <div class="clearfix"> </div>
         </div>
     </div>
-    <div class="content">
-        <div class="profile-content">
-            <div class="profile-image">
-                <img src="{{merchant.picture}}">
+    <div class="container-fluid my-sidebar">
+        <div class="row">
+            <div class="col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li><a href="/merchant" class="active">Dashboard</a></li>
+                    <li><a href="/merchant/profile">My Profile</a></li>
+                    <li><a href="/merchant/product">Product List</a></li>
+                    <li><a href="/merchant/product/upload">Add New Product</a></li>
+                </ul>
             </div>
-            <div class="profile-detail">
-                <b>Company name:</b> {{merchant.companyName}}<br>
-                <b>Status:</b> Active<br>
+            <div class="col-md-10 main">
+                <div class="content">
+                    <div class="profile-content">
+                        <div class="profile-image">
+                            <img src="{{merchant.picture}}">
+                        </div>
+                        <div class="profile-detail">
+                            <b>Company name:</b> {{merchant.companyName}}<br>
+                            <b>Status:</b> Active<br>
+                        </div>
+                    </div>
+                    <h3 style="margin-top:50px;">Order</h3>
+                    <div class="merchant-order">
+                        <table class="merchant-order-table">
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Customer</th>
+                                <th>Product</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                            {{#order}}
+                            <tr>
+                                <td><a href="order/detail">{{id}}</a></td>
+                                <td>{{customer.companyName}}</td>
+                                <td>
+                                    {{#detailOrders}}
+                                    <p>{{product.name}} {{amount}} {{product.unit}}</p>
+                                    {{/detailOrders}}
+                                    Total Price: <b><span class ="item_price">{{totalPrice}}</span></b>
+                                </td>
+                                <td>{{createdDate}}</td>
+                                <td>
+                                    {{#statusOngoing}}
+                                    <form action="/merchant/order/{{id}}/accept" method="post" class="form-w3agile">
+                                        <input type="hidden" name="_csrf" value="{{_csrf}}"/>
+                                        <input type="submit" class="accept" value="Accept">
+                                    </form>
+                                    {{/statusOngoing}}
+                                    {{#statusDone}}
+                                    <b>Accepted</b>
+                                    {{/statusDone}}
+
+                                </td>
+                            </tr>
+                            {{/order}}
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="merchant-menu">
-            <a href="/merchant/profile" class="button">My Profile</a>
-            <a href="/merchant/product" class="button">Product List</a>
-            <a href="/merchant/product/upload" class="button">Add New Product</a>
-        </div>
-        <h3>Order</h3>
-        <div class="merchant-order">
-            <table class="merchant-order-table">
-                <tr>
-                    <th>Order Id</th>
-                    <th>Customer</th>
-                    <th>Product</th>
-                    <th>Date</th>
-                    <th>Status</th>
-
-                </tr>
-                {{#order}}
-                <tr>
-                    <td><a href="order/detail">{{id}}</a></td>
-                    <td>{{merchant.username}}</td>
-                    <td>
-                        <ul>{{#detailOrders}}
-                            <li>{{product.name}} {{amount}} {{product.unit}}</li>
-                        {{/detailOrders}}</ul>
-                    </td>
-                    <td>{{createdDate}}</td>
-                    <td>
-                        {{#statusOngoing}}
-                        <form action="/merchant/order/{{id}}/accept" method="post" class="form-w3agile">
-                            <input type="hidden" name="_csrf" value="{{_csrf}}"/>
-                            <input type="submit" class="accept" value="Accept">
-                        </form>
-                        {{/statusOngoing}}
-                        {{#statusDone}}
-                        <b>Accepted</b>
-                        {{/statusDone}}
-
-                    </td>
-                </tr>
-                {{/order}}
-            </table>
         </div>
     </div>
+
 <!--footer-->
 {{>footer}}
 <!--//footer-->
