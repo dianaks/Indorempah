@@ -76,6 +76,13 @@ public class CustomerController {
     public String registerNewUser(@ModelAttribute Customer customer, Model model){
         customer.createUserRoleEntry(userRoleRepository);
         customerRepository.save(customer) ;
+        customer.createUserRoleEntry(userRoleRepository);
+        customer.setPicture("/assets/images/av.png");
+        customer.setCompanyName("");
+        customer.setCompanyAddress("");
+        customer.setPhoneNumber("");
+        customer.setBankAccountNumber("");
+        customerRepository.save(customer);
 
         //redirect halaman /home
         model.addAttribute("newUser", customer);
@@ -280,75 +287,6 @@ public class CustomerController {
         model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
         return "/user/profile";
     }
-//
-////    @RequestMapping("/user/profile/edit")
-////    public String userEditProfile (Model model){
-////        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-////        boolean isLoginAsCustomer = auth.isAuthenticated() &&
-////                !(auth instanceof AnonymousAuthenticationToken) ;
-////        if (isLoginAsCustomer) {
-////            Customer customer = customerRepository.findByUsername(auth.getName());
-////            model.addAttribute("customer", customer);
-////        }
-////        model.addAttribute("isLoginAsCustomer", isLoginAsCustomer);
-////        return "/user/edit-profile";
-////    }
-//
-//
-//
-//    @PostMapping("/register")
-////    public String registerNewUser(@ModelAttribute Customer customer, Model model){
-////        customer.createUserRoleEntry(userRoleRepository);
-////        customerRepository.save(customer) ;
-////
-////
-////        model.addAttribute("newUser", customer);
-////        return "redirect:/";
-////    }
-//
-//    @RequestMapping("/user/profile/edit")
-//    public String editProfile(@ModelAttribute Customer customer, HttpServletRequest request, Model model) {
-//        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-//        model.addAttribute("_csrf", _csrf);
-//
-//        Customer editableProfile = (Customer)authService().getAuthenticatedUser();
-//        model.addAttribute("customer", editableProfile);
-//
-//        return "user/edit-profile";
-//    }
-//
-//    @PostMapping("/user/profile/editedSave")
-////    public String saveEditedProfile(
-////            HttpServletRequest request)
-////    {
-////        Customer editableProfile = (Customer) authService().getAuthenticatedUser();
-////        model.addAttribute("_csrf", _csrf);
-////        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-////        model.addAttribute("_csrf", _csrf);
-//
-//    public String saveEditedProfile(HttpServletRequest request, Model model) {
-//        String _csrf = ((CsrfToken) request.getAttribute("_csrf")).getToken();
-//        model.addAttribute("_csrf", _csrf);
-//
-//        Customer editableProfile = (Customer)authService().getAuthenticatedUser();
-//        model.addAttribute("customer", editableProfile  );
-//
-//        editableProfile.setUsername(request.getParameter("username"));
-//        editableProfile.setEmail(request.getParameter("email"));
-//        editableProfile.setCompanyName(request.getParameter("companyName"));
-//        editableProfile.setCompanyAddress(request.getParameter("companyAddress"));
-//        editableProfile.setPhoneNumber(request.getParameter("phoneNumber"));
-//
-//        customerRepository.save(editableProfile);
-//        return "redirect:/user/profile";
-//    }
-
-
-
-
-
-
-
 
     @RequestMapping(value="/user/profile/edit", method= RequestMethod.GET)
     public String editCustomerForm(
